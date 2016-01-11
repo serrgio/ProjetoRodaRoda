@@ -4,19 +4,21 @@
  * and open the template in the editor.
  */
 package jogorodaroda.Interface;
+import jogorodaroda.Classe.ClasseTelaInicial;
 import jogorodaroda.Interface.TelaPrincipal;
 
 /**
  *
  * @author GAOliveira
  */
-public class TelaInicial extends javax.swing.JFrame {
+public class TelaInicial extends javax.swing.JFrame{
 
     /**
      * Creates new form TelaInicial
      */
     public TelaInicial() {
         initComponents();
+        
     }
 
     /**
@@ -135,8 +137,10 @@ public class TelaInicial extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaInicial().setVisible(true);
+
             }
         });
+               
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
