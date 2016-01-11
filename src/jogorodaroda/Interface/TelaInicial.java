@@ -5,7 +5,7 @@
  */
 package jogorodaroda.Interface;
 import jogorodaroda.Classe.ClasseTelaInicial;
-import jogorodaroda.Interface.TelaPrincipal;
+import jogorodaroda.Interface.TelaUmJogador;
 
 /**
  *
@@ -98,7 +98,7 @@ public class TelaInicial extends javax.swing.JFrame{
     }//GEN-LAST:event_btSairActionPerformed
 
     private void btIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIniciarActionPerformed
-        TelaPrincipal telaPrincipal  = new TelaPrincipal();
+        TelaUmJogador telaPrincipal  = new TelaUmJogador();
         telaPrincipal.dispose();
         telaPrincipal.setVisible(true);
         telaPrincipal.setLocationRelativeTo(null);
