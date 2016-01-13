@@ -14,8 +14,8 @@ public class Main{
         telaInicial.setVisible(true);
         telaInicial.setLocationRelativeTo(null);
         
-        ClasseTelaInicial classeTelaIicial = new ClasseTelaInicial();
-        classeTelaIicial.audioInicial();
+        Metodos metodos = new Metodos();
+        metodos.audioInicial();
         
         
     }
