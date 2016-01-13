@@ -1,5 +1,10 @@
 package jogorodaroda.Interface;
 
+import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author GAOliveira
@@ -11,6 +16,25 @@ public class TelaUmJogador extends javax.swing.JFrame {
      */
     public TelaUmJogador() {
         initComponents();
+        
+    }
+    
+    public void imageRoleta() throws InterruptedException{
+       
+        for(int x = 1; x <= 5; x++){
+            for(int i = 20; i >= 1; i--){
+
+                    ImageIcon img = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Roleta/"+i+".png"));
+                    roleta.setIcon(img);
+                    roleta.paint(getGraphics().create(279, 220, 480, 480));
+                    ImageIcon sel = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Seletor.png"));
+                    seletor.setIcon(sel);
+                    seletor.paint(getGraphics().create(499, 220, 41, 71));
+                    new Thread().sleep(100);          
+
+            }
+        }
+        
     }
 
     /**
@@ -24,6 +48,7 @@ public class TelaUmJogador extends javax.swing.JFrame {
 
         seletor = new javax.swing.JLabel();
         roleta = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         imagemFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,12 +64,32 @@ public class TelaUmJogador extends javax.swing.JFrame {
         getContentPane().add(roleta);
         roleta.setBounds(270, 190, 480, 480);
 
+        jButton1.setText("Rodar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(773, 290, 110, 23);
+
         imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Tela1Jogador.png"))); // NOI18N
         getContentPane().add(imagemFundo);
         imagemFundo.setBounds(0, 0, 1210, 680);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+            try {
+                imageRoleta();
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TelaUmJogador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,6 +135,7 @@ public class TelaUmJogador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imagemFundo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel roleta;
     private javax.swing.JLabel seletor;
     // End of variables declaration//GEN-END:variables

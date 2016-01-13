@@ -1,5 +1,7 @@
 package jogorodaroda.Interface;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author GAOliveira
@@ -11,6 +13,23 @@ public class TelaTresJogadores extends javax.swing.JFrame {
      */
     public TelaTresJogadores() {
         initComponents();
+    }
+    
+    public void imageRoleta() throws InterruptedException{
+            
+        for(int x = 1; x <= 5; x++){
+            for(int i = 20; i >= 1; i--){
+
+                ImageIcon img = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Roleta/"+i+".png"));
+                roleta.setIcon(img);
+                roleta.paint(getGraphics().create(279, 220, 480, 480));
+                ImageIcon sel = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Seletor.png"));
+                seletor.setIcon(sel);
+                seletor.paint(getGraphics().create(499, 220, 41, 71));
+                new Thread().sleep(100);          
+            }
+        }
+        
     }
 
     /**
