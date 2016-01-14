@@ -1,6 +1,7 @@
 package jogorodaroda.Interface;
 
 import java.awt.Image;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -21,16 +22,21 @@ public class TelaUmJogador extends javax.swing.JFrame {
     
     public void imageRoleta() throws InterruptedException{
        
-        for(int x = 1; x <= 5; x++){
+        Random random = new Random();
+        int aleatorio = random.nextInt(3) + 2;
+        
+        System.out.println(aleatorio);
+        
+        for(int x = 1; x <= aleatorio; x++){
             for(int i = 20; i >= 1; i--){
-
+                
                     ImageIcon img = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Roleta/"+i+".png"));
                     roleta.setIcon(img);
                     roleta.paint(getGraphics().create(279, 220, 480, 480));
                     ImageIcon sel = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Seletor.png"));
                     seletor.setIcon(sel);
                     seletor.paint(getGraphics().create(499, 220, 41, 71));
-                    new Thread().sleep(100);          
+                    new Thread().sleep(x * 50);          
 
             }
         }
@@ -49,6 +55,54 @@ public class TelaUmJogador extends javax.swing.JFrame {
         seletor = new javax.swing.JLabel();
         roleta = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        etapa = new javax.swing.JLabel();
+        p1l1 = new javax.swing.JLabel();
+        p1l2 = new javax.swing.JLabel();
+        p1l3 = new javax.swing.JLabel();
+        p1l4 = new javax.swing.JLabel();
+        p1l5 = new javax.swing.JLabel();
+        p1l6 = new javax.swing.JLabel();
+        p1l7 = new javax.swing.JLabel();
+        p1l8 = new javax.swing.JLabel();
+        p1l9 = new javax.swing.JLabel();
+        p1l10 = new javax.swing.JLabel();
+        p1l11 = new javax.swing.JLabel();
+        p1l12 = new javax.swing.JLabel();
+        p1l13 = new javax.swing.JLabel();
+        p1l14 = new javax.swing.JLabel();
+        p1l15 = new javax.swing.JLabel();
+        p2l1 = new javax.swing.JLabel();
+        p2l2 = new javax.swing.JLabel();
+        p2l3 = new javax.swing.JLabel();
+        p2l4 = new javax.swing.JLabel();
+        p2l5 = new javax.swing.JLabel();
+        p2l6 = new javax.swing.JLabel();
+        p2l7 = new javax.swing.JLabel();
+        p2l8 = new javax.swing.JLabel();
+        p2l9 = new javax.swing.JLabel();
+        p2l10 = new javax.swing.JLabel();
+        p2l11 = new javax.swing.JLabel();
+        p2l12 = new javax.swing.JLabel();
+        p2l13 = new javax.swing.JLabel();
+        p2l14 = new javax.swing.JLabel();
+        p2l15 = new javax.swing.JLabel();
+        p3l1 = new javax.swing.JLabel();
+        p3l2 = new javax.swing.JLabel();
+        p3l3 = new javax.swing.JLabel();
+        p3l4 = new javax.swing.JLabel();
+        p3l5 = new javax.swing.JLabel();
+        p3l6 = new javax.swing.JLabel();
+        p3l7 = new javax.swing.JLabel();
+        p3l8 = new javax.swing.JLabel();
+        p3l9 = new javax.swing.JLabel();
+        p3l10 = new javax.swing.JLabel();
+        p3l11 = new javax.swing.JLabel();
+        p3l12 = new javax.swing.JLabel();
+        p3l13 = new javax.swing.JLabel();
+        p3l14 = new javax.swing.JLabel();
+        p3l15 = new javax.swing.JLabel();
+        dica = new javax.swing.JLabel();
         imagemFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +127,295 @@ public class TelaUmJogador extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(773, 290, 110, 23);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Etapa:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(1000, 20, 80, 50);
+
+        etapa.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        etapa.setForeground(new java.awt.Color(0, 0, 255));
+        getContentPane().add(etapa);
+        etapa.setBounds(1090, 30, 100, 30);
+
+        p1l1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        p1l1.setPreferredSize(new java.awt.Dimension(40, 40));
+        getContentPane().add(p1l1);
+        p1l1.setBounds(400, 30, 30, 30);
+
+        p1l2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l2);
+        p1l2.setBounds(430, 30, 30, 30);
+
+        p1l3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l3);
+        p1l3.setBounds(460, 30, 30, 30);
+
+        p1l4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l4);
+        p1l4.setBounds(490, 30, 30, 30);
+
+        p1l5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l5);
+        p1l5.setBounds(520, 30, 30, 30);
+
+        p1l6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l6);
+        p1l6.setBounds(550, 30, 30, 30);
+
+        p1l7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l7);
+        p1l7.setBounds(580, 30, 30, 30);
+
+        p1l8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l8);
+        p1l8.setBounds(610, 30, 30, 30);
+
+        p1l9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l9);
+        p1l9.setBounds(640, 30, 30, 30);
+
+        p1l10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l10);
+        p1l10.setBounds(670, 30, 30, 30);
+
+        p1l11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l11);
+        p1l11.setBounds(700, 30, 30, 30);
+
+        p1l12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l12);
+        p1l12.setBounds(730, 30, 30, 30);
+
+        p1l13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l13);
+        p1l13.setBounds(760, 30, 30, 30);
+
+        p1l14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l14);
+        p1l14.setBounds(790, 30, 30, 30);
+
+        p1l15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p1l15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p1l15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p1l15);
+        p1l15.setBounds(820, 30, 30, 30);
+
+        p2l1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        p2l1.setPreferredSize(new java.awt.Dimension(40, 40));
+        getContentPane().add(p2l1);
+        p2l1.setBounds(400, 60, 30, 30);
+
+        p2l2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l2);
+        p2l2.setBounds(430, 60, 30, 30);
+
+        p2l3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l3);
+        p2l3.setBounds(460, 60, 30, 30);
+
+        p2l4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l4);
+        p2l4.setBounds(490, 60, 30, 30);
+
+        p2l5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l5);
+        p2l5.setBounds(520, 60, 30, 30);
+
+        p2l6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l6);
+        p2l6.setBounds(550, 60, 30, 30);
+
+        p2l7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l7);
+        p2l7.setBounds(580, 60, 30, 30);
+
+        p2l8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l8);
+        p2l8.setBounds(610, 60, 30, 30);
+
+        p2l9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l9);
+        p2l9.setBounds(640, 60, 30, 30);
+
+        p2l10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l10);
+        p2l10.setBounds(670, 60, 30, 30);
+
+        p2l11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l11);
+        p2l11.setBounds(700, 60, 30, 30);
+
+        p2l12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l12);
+        p2l12.setBounds(730, 60, 30, 30);
+
+        p2l13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l13);
+        p2l13.setBounds(760, 60, 30, 30);
+
+        p2l14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l14);
+        p2l14.setBounds(790, 60, 30, 30);
+
+        p2l15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p2l15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p2l15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p2l15);
+        p2l15.setBounds(820, 60, 30, 30);
+
+        p3l1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        p3l1.setPreferredSize(new java.awt.Dimension(40, 40));
+        getContentPane().add(p3l1);
+        p3l1.setBounds(400, 90, 30, 30);
+
+        p3l2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l2);
+        p3l2.setBounds(430, 90, 30, 30);
+
+        p3l3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l3);
+        p3l3.setBounds(460, 90, 30, 30);
+
+        p3l4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l4);
+        p3l4.setBounds(490, 90, 30, 30);
+
+        p3l5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l5);
+        p3l5.setBounds(520, 90, 30, 30);
+
+        p3l6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l6);
+        p3l6.setBounds(550, 90, 30, 30);
+
+        p3l7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l7);
+        p3l7.setBounds(580, 90, 30, 30);
+
+        p3l8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l8);
+        p3l8.setBounds(610, 90, 30, 30);
+
+        p3l9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l9);
+        p3l9.setBounds(640, 90, 30, 30);
+
+        p3l10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l10);
+        p3l10.setBounds(670, 90, 30, 30);
+
+        p3l11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l11);
+        p3l11.setBounds(700, 90, 30, 30);
+
+        p3l12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l12);
+        p3l12.setBounds(730, 90, 30, 30);
+
+        p3l13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l13);
+        p3l13.setBounds(760, 90, 30, 30);
+
+        p3l14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l14);
+        p3l14.setBounds(790, 90, 30, 30);
+
+        p3l15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        p3l15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        p3l15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(p3l15);
+        p3l15.setBounds(820, 90, 30, 30);
+
+        dica.setFont(new java.awt.Font("Bookman Old Style", 1, 24)); // NOI18N
+        dica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(dica);
+        dica.setBounds(420, 153, 410, 30);
+
         imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Tela1Jogador.png"))); // NOI18N
         getContentPane().add(imagemFundo);
         imagemFundo.setBounds(0, 0, 1210, 680);
@@ -94,28 +437,14 @@ public class TelaUmJogador extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InstantiationException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaUmJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaUmJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaUmJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaUmJogador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+
+       
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -134,8 +463,56 @@ public class TelaUmJogador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel dica;
+    private javax.swing.JLabel etapa;
     private javax.swing.JLabel imagemFundo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel p1l1;
+    private javax.swing.JLabel p1l10;
+    private javax.swing.JLabel p1l11;
+    private javax.swing.JLabel p1l12;
+    private javax.swing.JLabel p1l13;
+    private javax.swing.JLabel p1l14;
+    private javax.swing.JLabel p1l15;
+    private javax.swing.JLabel p1l2;
+    private javax.swing.JLabel p1l3;
+    private javax.swing.JLabel p1l4;
+    private javax.swing.JLabel p1l5;
+    private javax.swing.JLabel p1l6;
+    private javax.swing.JLabel p1l7;
+    private javax.swing.JLabel p1l8;
+    private javax.swing.JLabel p1l9;
+    private javax.swing.JLabel p2l1;
+    private javax.swing.JLabel p2l10;
+    private javax.swing.JLabel p2l11;
+    private javax.swing.JLabel p2l12;
+    private javax.swing.JLabel p2l13;
+    private javax.swing.JLabel p2l14;
+    private javax.swing.JLabel p2l15;
+    private javax.swing.JLabel p2l2;
+    private javax.swing.JLabel p2l3;
+    private javax.swing.JLabel p2l4;
+    private javax.swing.JLabel p2l5;
+    private javax.swing.JLabel p2l6;
+    private javax.swing.JLabel p2l7;
+    private javax.swing.JLabel p2l8;
+    private javax.swing.JLabel p2l9;
+    private javax.swing.JLabel p3l1;
+    private javax.swing.JLabel p3l10;
+    private javax.swing.JLabel p3l11;
+    private javax.swing.JLabel p3l12;
+    private javax.swing.JLabel p3l13;
+    private javax.swing.JLabel p3l14;
+    private javax.swing.JLabel p3l15;
+    private javax.swing.JLabel p3l2;
+    private javax.swing.JLabel p3l3;
+    private javax.swing.JLabel p3l4;
+    private javax.swing.JLabel p3l5;
+    private javax.swing.JLabel p3l6;
+    private javax.swing.JLabel p3l7;
+    private javax.swing.JLabel p3l8;
+    private javax.swing.JLabel p3l9;
     private javax.swing.JLabel roleta;
     private javax.swing.JLabel seletor;
     // End of variables declaration//GEN-END:variables
