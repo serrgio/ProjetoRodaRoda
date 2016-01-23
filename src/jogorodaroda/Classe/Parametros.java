@@ -1,10 +1,10 @@
 package jogorodaroda.Classe;
 
-public class Parametros extends java.lang.Thread{
+public class Parametros{
     
-    private int qtdJogadores;
-    private String qtdPalavras;
-    private String qtdEtapas;
+    static int qtdJogadores;
+    static int qtdPalavras;
+    static int qtdEtapas;
 
     public int getQtdJogadores() {
         return qtdJogadores;
@@ -14,19 +14,19 @@ public class Parametros extends java.lang.Thread{
         this.qtdJogadores = qtdJogadores;
     }
 
-    public String getQtdPalavras() {
+    public int getQtdPalavras() {
         return qtdPalavras;
     }
 
-    public void setQtdPalavras(String qtdPalavras) {
+    public void setQtdPalavras(int qtdPalavras) {
         this.qtdPalavras = qtdPalavras;
     }
 
-    public String getQtdEtapas() {
+    public int getQtdEtapas() {
         return qtdEtapas;
     }
 
-    public void setQtdEtapas(String qtdEtapas) {
+    public void setQtdEtapas(int qtdEtapas) {
         this.qtdEtapas = qtdEtapas;
     }
 

@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package jogorodaroda.Interface;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jogorodaroda.Classe.Metodos;
 import jogorodaroda.Classe.Parametros;
 
 /**
@@ -52,6 +57,7 @@ public class TelaInicial extends javax.swing.JFrame{
         btIniciar.setBackground(new java.awt.Color(255, 255, 255));
         btIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/btIniciar.PNG"))); // NOI18N
         btIniciar.setBorderPainted(false);
+        btIniciar.setContentAreaFilled(false);
         btIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btIniciarActionPerformed(evt);
@@ -96,43 +102,21 @@ public class TelaInicial extends javax.swing.JFrame{
         //Armazena parametros
         Parametros parametros = new Parametros();
         parametros.setQtdJogadores(comboJogador.getSelectedIndex()); 
-        parametros.setQtdPalavras((String) comboPalavras.getSelectedItem());
-        parametros.setQtdEtapas((String) comboEtapas.getSelectedItem());
-
-        switch(parametros.getQtdJogadores()){
-            case 1:
-                
-                TelaUmJogador umJogador  = new TelaUmJogador();
-                umJogador.dispose();
-                umJogador.setVisible(true);
-                umJogador.setLocationRelativeTo(null);
-//                umJogador.setExtendedState(MAXIMIZED_BOTH);
-                dispose();
-                
-            break;
-                
-            case 2:
-                
-                TelaDoisJogadores doisJogador  = new TelaDoisJogadores();
-                doisJogador.dispose();
-                doisJogador.setVisible(true);
-                doisJogador.setLocationRelativeTo(null);
-//                doisJogador.setExtendedState(MAXIMIZED_BOTH);
-                dispose();
-                
-            break;
-                
-            case 3:
-                
-                TelaTresJogadores tresJogador  = new TelaTresJogadores();
-                tresJogador.dispose();
-                tresJogador.setVisible(true);
-                tresJogador.setLocationRelativeTo(null);
+        parametros.setQtdPalavras(comboPalavras.getSelectedIndex());
+        parametros.setQtdEtapas(comboEtapas.getSelectedIndex());
+        
+        
+        TelaJogadores jogadores = null;
+        try {
+            jogadores = new TelaJogadores(parametros.getQtdJogadores(), parametros.getQtdPalavras(), parametros.getQtdEtapas());
+        } catch (IOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            jogadores.dispose();
+            jogadores.setVisible(true);
+            jogadores.setLocationRelativeTo(null);
 //                tresJogador.setExtendedState(MAXIMIZED_BOTH);
-                dispose();
-                
-            break;
-        }      
+            dispose();     
         
     }//GEN-LAST:event_btIniciarActionPerformed
 
@@ -167,7 +151,7 @@ public class TelaInicial extends javax.swing.JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaInicial().setVisible(true);
-
+                
             }
         });
                
