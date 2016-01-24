@@ -1,6 +1,7 @@
 package jogorodaroda.Interface;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import java.awt.Color;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ public class TelaJogadores extends javax.swing.JFrame {
     String [] listaPosicaoLetrasEncontradasPalavra1;
     String [] listaPosicaoLetrasEncontradasPalavra2;
     String [] listaPosicaoLetrasEncontradasPalavra3;
-    int valorReais = 0;
+    int valorReaisSorteado = 0;
+    int valorReaisAcumuladoJogadorCorrente = 0;
     int qtdPalavras;
 
     public void qtdPalavras(int qtdpalavra) {
@@ -104,6 +106,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         initComponents();
         qtdPalavras = palavras;
 
+        escondeTecladoLetras();
         etapa.setText("1 / " + etapas);
 
         switch (jogadores) {
@@ -144,8 +147,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         Random random = new Random();
         int aleatorio = random.nextInt(3) + 2;
         int sorteRoleta = random.nextInt(20) + 1;
-
-
+        
         for (int x = 1; x <= aleatorio; x++) {
             if(x != aleatorio ){
                 for (int i = 20; i >= 1; i--) {
@@ -182,11 +184,401 @@ public class TelaJogadores extends javax.swing.JFrame {
 
     public ArrayList guardaPalavrasSorteadas() throws IOException {
         Metodos m = new Metodos();
+        int tamanhoPalavra1;
+        int tamanhoPalavra2;
+        int tamanhoPalavra3;
+        
         listapalavrasSorteadas = m.palavrasSorteadas(listaPalavras);
         dica.setText(listapalavrasSorteadas.get(0));
-        for (Object palavrasorteadas : listapalavrasSorteadas) {
+        for(Object palavrasorteadas : listapalavrasSorteadas) {
             listaPalavras.add((String) palavrasorteadas);
+        }
+        
+        
+        switch(qtdPalavras){
+            case 1:
+            tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
+                 if(tamanhoPalavra1 >= 1){
+                    p1l1.setOpaque(true); // Deixa a label opaca.
+                    p1l1.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 2){
+                    p1l2.setOpaque(true); // Deixa a label opaca.
+                    p1l2.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 3){
+                    p1l3.setOpaque(true); // Deixa a label opaca.
+                    p1l3.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 4){
+                    p1l4.setOpaque(true); // Deixa a label opaca.
+                    p1l4.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 5){
+                    p1l5.setOpaque(true); // Deixa a label opaca.
+                    p1l5.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 6){
+                    p1l6.setOpaque(true); // Deixa a label opaca.
+                    p1l6.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 7){
+                    p1l7.setOpaque(true); // Deixa a label opaca.
+                    p1l7.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 8){
+                    p1l8.setOpaque(true); // Deixa a label opaca.
+                    p1l8.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 9){
+                    p1l9.setOpaque(true); // Deixa a label opaca.
+                    p1l9.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 10){
+                    p1l10.setOpaque(true); // Deixa a label opaca.
+                    p1l10.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 11){
+                    p1l11.setOpaque(true); // Deixa a label opaca.
+                    p1l11.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 12){
+                    p1l12.setOpaque(true); // Deixa a label opaca.
+                    p1l12.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 13){
+                    p1l13.setOpaque(true); // Deixa a label opaca.
+                    p1l13.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 14){
+                    p1l14.setOpaque(true); // Deixa a label opaca.
+                    p1l14.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 15){
+                    p1l15.setOpaque(true); // Deixa a label opaca.
+                    p1l15.setBackground(Color.white); // Muda a cor de fundo.
+                }
+            break;
+                
+            case 2:
+             tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
+             tamanhoPalavra2 = (listapalavrasSorteadas.get(2)).length();
 
+                if(tamanhoPalavra1 >= 1){
+                    p1l1.setOpaque(true); // Deixa a label opaca.
+                    p1l1.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 2){
+                    p1l2.setOpaque(true); // Deixa a label opaca.
+                    p1l2.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 3){
+                    p1l3.setOpaque(true); // Deixa a label opaca.
+                    p1l3.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 4){
+                    p1l4.setOpaque(true); // Deixa a label opaca.
+                    p1l4.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 5){
+                    p1l5.setOpaque(true); // Deixa a label opaca.
+                    p1l5.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 6){
+                    p1l6.setOpaque(true); // Deixa a label opaca.
+                    p1l6.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 7){
+                    p1l7.setOpaque(true); // Deixa a label opaca.
+                    p1l7.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 8){
+                    p1l8.setOpaque(true); // Deixa a label opaca.
+                    p1l8.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 9){
+                    p1l9.setOpaque(true); // Deixa a label opaca.
+                    p1l9.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 10){
+                    p1l10.setOpaque(true); // Deixa a label opaca.
+                    p1l10.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 11){
+                    p1l11.setOpaque(true); // Deixa a label opaca.
+                    p1l11.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 12){
+                    p1l12.setOpaque(true); // Deixa a label opaca.
+                    p1l12.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 13){
+                    p1l13.setOpaque(true); // Deixa a label opaca.
+                    p1l13.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 14){
+                    p1l14.setOpaque(true); // Deixa a label opaca.
+                    p1l14.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 15){
+                    p1l15.setOpaque(true); // Deixa a label opaca.
+                    p1l15.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                
+                
+                if(tamanhoPalavra2 >= 1){
+                    p2l1.setOpaque(true); // Deixa a label opaca.
+                    p2l1.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 2){
+                    p2l2.setOpaque(true); // Deixa a label opaca.
+                    p2l2.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 3){
+                    p2l3.setOpaque(true); // Deixa a label opaca.
+                    p2l3.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 4){
+                    p2l4.setOpaque(true); // Deixa a label opaca.
+                    p2l4.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 5){
+                    p2l5.setOpaque(true); // Deixa a label opaca.
+                    p2l5.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 6){
+                    p2l6.setOpaque(true); // Deixa a label opaca.
+                    p2l6.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 7){
+                    p2l7.setOpaque(true); // Deixa a label opaca.
+                    p2l7.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 8){
+                    p2l8.setOpaque(true); // Deixa a label opaca.
+                    p2l8.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 9){
+                    p2l9.setOpaque(true); // Deixa a label opaca.
+                    p2l9.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 10){
+                    p2l10.setOpaque(true); // Deixa a label opaca.
+                    p2l10.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 11){
+                    p2l11.setOpaque(true); // Deixa a label opaca.
+                    p2l11.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 12){
+                    p2l12.setOpaque(true); // Deixa a label opaca.
+                    p2l12.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 13){
+                    p2l13.setOpaque(true); // Deixa a label opaca.
+                    p2l13.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 14){
+                    p2l14.setOpaque(true); // Deixa a label opaca.
+                    p2l14.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 15){
+                    p2l15.setOpaque(true); // Deixa a label opaca.
+                    p2l15.setBackground(Color.white); // Muda a cor de fundo.
+                }
+            break;
+                
+            case 3:
+            tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
+            tamanhoPalavra2 = (listapalavrasSorteadas.get(2)).length();
+            tamanhoPalavra3 = (listapalavrasSorteadas.get(3)).length();
+
+                if(tamanhoPalavra1 >= 1){
+                    p1l1.setOpaque(true); // Deixa a label opaca.
+                    p1l1.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 2){
+                    p1l2.setOpaque(true); // Deixa a label opaca.
+                    p1l2.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 3){
+                    p1l3.setOpaque(true); // Deixa a label opaca.
+                    p1l3.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 4){
+                    p1l4.setOpaque(true); // Deixa a label opaca.
+                    p1l4.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 5){
+                    p1l5.setOpaque(true); // Deixa a label opaca.
+                    p1l5.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 6){
+                    p1l6.setOpaque(true); // Deixa a label opaca.
+                    p1l6.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 7){
+                    p1l7.setOpaque(true); // Deixa a label opaca.
+                    p1l7.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 8){
+                    p1l8.setOpaque(true); // Deixa a label opaca.
+                    p1l8.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 9){
+                    p1l9.setOpaque(true); // Deixa a label opaca.
+                    p1l9.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 10){
+                    p1l10.setOpaque(true); // Deixa a label opaca.
+                    p1l10.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 11){
+                    p1l11.setOpaque(true); // Deixa a label opaca.
+                    p1l11.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 12){
+                    p1l12.setOpaque(true); // Deixa a label opaca.
+                    p1l12.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 13){
+                    p1l13.setOpaque(true); // Deixa a label opaca.
+                    p1l13.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 14){
+                    p1l14.setOpaque(true); // Deixa a label opaca.
+                    p1l14.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra1 >= 15){
+                    p1l15.setOpaque(true); // Deixa a label opaca.
+                    p1l15.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                
+                
+                if(tamanhoPalavra2 >= 1){
+                    p2l1.setOpaque(true); // Deixa a label opaca.
+                    p2l1.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 2){
+                    p2l2.setOpaque(true); // Deixa a label opaca.
+                    p2l2.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 3){
+                    p2l3.setOpaque(true); // Deixa a label opaca.
+                    p2l3.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 4){
+                    p2l4.setOpaque(true); // Deixa a label opaca.
+                    p2l4.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 5){
+                    p2l5.setOpaque(true); // Deixa a label opaca.
+                    p2l5.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 6){
+                    p2l6.setOpaque(true); // Deixa a label opaca.
+                    p2l6.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 7){
+                    p2l7.setOpaque(true); // Deixa a label opaca.
+                    p2l7.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 8){
+                    p2l8.setOpaque(true); // Deixa a label opaca.
+                    p2l8.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 9){
+                    p2l9.setOpaque(true); // Deixa a label opaca.
+                    p2l9.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 10){
+                    p2l10.setOpaque(true); // Deixa a label opaca.
+                    p2l10.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 11){
+                    p2l11.setOpaque(true); // Deixa a label opaca.
+                    p2l11.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 12){
+                    p2l12.setOpaque(true); // Deixa a label opaca.
+                    p2l12.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 13){
+                    p2l13.setOpaque(true); // Deixa a label opaca.
+                    p2l13.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 14){
+                    p2l14.setOpaque(true); // Deixa a label opaca.
+                    p2l14.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra2 >= 15){
+                    p2l15.setOpaque(true); // Deixa a label opaca.
+                    p2l15.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                
+                
+                
+                if(tamanhoPalavra3 >= 1){
+                    p3l1.setOpaque(true); // Deixa a label opaca.
+                    p3l1.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 2){
+                    p3l2.setOpaque(true); // Deixa a label opaca.
+                    p3l2.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 3){
+                    p3l3.setOpaque(true); // Deixa a label opaca.
+                    p3l3.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 4){
+                    p3l4.setOpaque(true); // Deixa a label opaca.
+                    p3l4.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 5){
+                    p3l5.setOpaque(true); // Deixa a label opaca.
+                    p3l5.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 6){
+                    p3l6.setOpaque(true); // Deixa a label opaca.
+                    p3l6.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 7){
+                    p3l7.setOpaque(true); // Deixa a label opaca.
+                    p3l7.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 8){
+                    p3l8.setOpaque(true); // Deixa a label opaca.
+                    p3l8.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 9){
+                    p3l9.setOpaque(true); // Deixa a label opaca.
+                    p3l9.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 10){
+                    p3l10.setOpaque(true); // Deixa a label opaca.
+                    p3l10.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 11){
+                    p3l11.setOpaque(true); // Deixa a label opaca.
+                    p3l11.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 12){
+                    p3l12.setOpaque(true); // Deixa a label opaca.
+                    p3l12.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 13){
+                    p3l13.setOpaque(true); // Deixa a label opaca.
+                    p3l13.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 14){
+                    p3l14.setOpaque(true); // Deixa a label opaca.
+                    p3l14.setBackground(Color.white); // Muda a cor de fundo.
+                }
+                if(tamanhoPalavra3 >= 15){
+                    p3l15.setOpaque(true); // Deixa a label opaca.
+                    p3l15.setBackground(Color.white); // Muda a cor de fundo.
+                }
+            break;
         }
 
         return listapalavrasSorteadas;
@@ -197,22 +589,27 @@ public class TelaJogadores extends javax.swing.JFrame {
         String palavra2;
         String palavra3;
         String achouLetra;
+        palavra1 = palavrasEtapa.get(1).toString();
+        palavra2 = palavrasEtapa.get(2).toString();
+        palavra3 = palavrasEtapa.get(3).toString();
         
         switch(qtdPalavras){
-            case 1:
-                palavra1 = palavrasEtapa.get(1).toString();
+            case 1:            
                 System.err.println(palavra1);
                 for(int i = 0; i < palavra1.length(); i ++){
                     achouLetra = palavra1.substring(i, i + 1);
                     
                     if(achouLetra.equals(letraEscolhida)){
                        listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
+                       if(valorReaisSorteado > 0){
+                            valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
                 }
-                
+                    
                 try{
                     p1l1.setText(listaPosicaoLetrasEncontradasPalavra1[0]);
                     p1l2.setText(listaPosicaoLetrasEncontradasPalavra1[1]);
@@ -237,26 +634,30 @@ public class TelaJogadores extends javax.swing.JFrame {
             break;
             
             case 2:
-                palavra1 = palavrasEtapa.get(1).toString();
                 System.err.println(palavra1);
                 for(int i = 0; i < palavra1.length(); i ++){
                     achouLetra = palavra1.substring(i, i + 1);
                     
                     if(achouLetra.equals(letraEscolhida)){
                        listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
+                       if(valorReaisSorteado > 0){
+                            valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
                 }
                 
-                palavra2 = palavrasEtapa.get(2).toString();
                 System.err.println(palavra2);
                 for(int i = 0; i < palavra2.length(); i ++){
                     achouLetra = palavra2.substring(i, i + 1);
                     
                     if(achouLetra.equals(letraEscolhida)){
                        listaPosicaoLetrasEncontradasPalavra2[i] = letraEscolhida;
+                       if(valorReaisSorteado > 0){
+                            valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra2[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra2[i] = " ";
@@ -264,6 +665,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                 }
                 
                 try{
+                    
                     p1l1.setText(listaPosicaoLetrasEncontradasPalavra1[0]);
                     p1l2.setText(listaPosicaoLetrasEncontradasPalavra1[1]);
                     p1l3.setText(listaPosicaoLetrasEncontradasPalavra1[2]);
@@ -283,7 +685,8 @@ public class TelaJogadores extends javax.swing.JFrame {
                 catch(Exception ex){
                 }
                 
-                try{
+                     
+                try{    
                     p2l1.setText(listaPosicaoLetrasEncontradasPalavra2[0]);
                     p2l2.setText(listaPosicaoLetrasEncontradasPalavra2[1]);
                     p2l3.setText(listaPosicaoLetrasEncontradasPalavra2[2]);
@@ -306,46 +709,52 @@ public class TelaJogadores extends javax.swing.JFrame {
             break;
                 
             case 3:
-                palavra1 = palavrasEtapa.get(1).toString();
                 System.err.println(palavra1);
                 for(int i = 0; i < palavra1.length(); i ++){
                     achouLetra = palavra1.substring(i, i + 1);
                     
                     if(achouLetra.equals(letraEscolhida)){
                        listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
+                       if(valorReaisSorteado > 0){
+                            valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
                 }
                 
-                palavra2 = palavrasEtapa.get(2).toString();
                 System.err.println(palavra2);
                 for(int i = 0; i < palavra2.length(); i ++){
                     achouLetra = palavra2.substring(i, i + 1);
                     
                     if(achouLetra.equals(letraEscolhida)){
                        listaPosicaoLetrasEncontradasPalavra2[i] = letraEscolhida;
+                       if(valorReaisSorteado > 0){
+                            valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra2[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra2[i] = " ";
                     }
                 }
                 
-                palavra3 = palavrasEtapa.get(3).toString();
                 System.err.println(palavra3);
                 for(int i = 0; i < palavra3.length(); i ++){
                     achouLetra = palavra3.substring(i, i + 1);
                     
                     if(achouLetra.equals(letraEscolhida)){
                        listaPosicaoLetrasEncontradasPalavra3[i] = letraEscolhida;
+                       if(valorReaisSorteado > 0){
+                            valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra3[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra3[i] = " ";
                     }
                 }
-                
-                try{
+                    
+                try{    
                     p1l1.setText(listaPosicaoLetrasEncontradasPalavra1[0]);
                     p1l2.setText(listaPosicaoLetrasEncontradasPalavra1[1]);
                     p1l3.setText(listaPosicaoLetrasEncontradasPalavra1[2]);
@@ -384,8 +793,8 @@ public class TelaJogadores extends javax.swing.JFrame {
                 }
                 catch(Exception ex){
                 }
-                
-                try{
+                                
+                try{    
                     p3l1.setText(listaPosicaoLetrasEncontradasPalavra3[0]);
                     p3l2.setText(listaPosicaoLetrasEncontradasPalavra3[1]);
                     p3l3.setText(listaPosicaoLetrasEncontradasPalavra3[2]);
@@ -409,11 +818,67 @@ public class TelaJogadores extends javax.swing.JFrame {
             break;            
             
         }
-        
-                
-                
-//                JOptionPane.showMessageDialog(null, "");
 
+    }
+    
+    public void escondeTecladoLetras(){
+        btA.setVisible(false);
+        btB.setVisible(false);
+        btC.setVisible(false);
+        btD.setVisible(false);
+        btE.setVisible(false);
+        btF.setVisible(false);
+        btG.setVisible(false);
+        btH.setVisible(false);
+        btI.setVisible(false);
+        btJ.setVisible(false);
+        btK.setVisible(false);
+        btL.setVisible(false);
+        btM.setVisible(false);
+        btN.setVisible(false);
+        btO.setVisible(false);
+        btP.setVisible(false);
+        btQ.setVisible(false);
+        btR.setVisible(false);
+        btS.setVisible(false);
+        btT.setVisible(false);
+        btU.setVisible(false);
+        btV.setVisible(false);
+        btX.setVisible(false);
+        btW.setVisible(false);
+        btY.setVisible(false);
+        btZ.setVisible(false);
+        
+        btRodar.setEnabled(true);
+    }
+    
+    public void mostraTecladoLetras(){
+        btA.setVisible(true);
+        btB.setVisible(true);
+        btC.setVisible(true);
+        btD.setVisible(true);
+        btE.setVisible(true);
+        btF.setVisible(true);
+        btG.setVisible(true);
+        btH.setVisible(true);
+        btI.setVisible(true);
+        btJ.setVisible(true);
+        btK.setVisible(true);
+        btL.setVisible(true);
+        btM.setVisible(true);
+        btN.setVisible(true);
+        btO.setVisible(true);
+        btP.setVisible(true);
+        btQ.setVisible(true);
+        btR.setVisible(true);
+        btS.setVisible(true);
+        btT.setVisible(true);
+        btU.setVisible(true);
+        btV.setVisible(true);
+        btX.setVisible(true);
+        btW.setVisible(true);
+        btY.setVisible(true);
+        btZ.setVisible(true);
     }
     
     /**
@@ -502,7 +967,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         btY = new javax.swing.JToggleButton();
         btZ = new javax.swing.JToggleButton();
         btResponder = new javax.swing.JButton();
-        brRodar = new javax.swing.JButton();
+        btRodar = new javax.swing.JButton();
         saldoJogador1 = new javax.swing.JLabel();
         saldoJogador2 = new javax.swing.JLabel();
         saldoJogador3 = new javax.swing.JLabel();
@@ -1103,23 +1568,28 @@ public class TelaJogadores extends javax.swing.JFrame {
         btResponder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/btresponder.png"))); // NOI18N
         btResponder.setContentAreaFilled(false);
         btResponder.setFocusable(false);
+        btResponder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btResponderActionPerformed(evt);
+            }
+        });
         getContentPane().add(btResponder);
         btResponder.setBounds(760, 490, 170, 40);
 
         //brRodar.setBackground(new Color(0,0,0,0));
-        brRodar.setBackground(new java.awt.Color(0, 0, 0));
-        brRodar.setForeground(new java.awt.Color(255, 255, 255));
-        brRodar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/btrodarativo.png"))); // NOI18N
-        brRodar.setToolTipText("Rodar Roleta");
-        brRodar.setBorder(null);
-        brRodar.setContentAreaFilled(false);
-        brRodar.addActionListener(new java.awt.event.ActionListener() {
+        btRodar.setBackground(new java.awt.Color(0, 0, 0));
+        btRodar.setForeground(new java.awt.Color(255, 255, 255));
+        btRodar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/btrodarativo.png"))); // NOI18N
+        btRodar.setToolTipText("Rodar Roleta");
+        btRodar.setBorder(null);
+        btRodar.setContentAreaFilled(false);
+        btRodar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                brRodarActionPerformed(evt);
+                btRodarActionPerformed(evt);
             }
         });
-        getContentPane().add(brRodar);
-        brRodar.setBounds(810, 390, 80, 70);
+        getContentPane().add(btRodar);
+        btRodar.setBounds(810, 390, 80, 70);
 
         saldoJogador1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         saldoJogador1.setForeground(new java.awt.Color(255, 0, 0));
@@ -1167,46 +1637,67 @@ public class TelaJogadores extends javax.swing.JFrame {
 
     private void btAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAActionPerformed
         letraSelecionada("A", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btA.setEnabled(false);
+        escondeTecladoLetras();
+        
 
     }//GEN-LAST:event_btAActionPerformed
 
     private void btBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBActionPerformed
         letraSelecionada("B", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btB.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btBActionPerformed
 
     private void btFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFActionPerformed
         letraSelecionada("F", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btF.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btFActionPerformed
 
     private void btHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHActionPerformed
         letraSelecionada("H", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btH.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btHActionPerformed
 
     private void btIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIActionPerformed
         letraSelecionada("I", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btI.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btIActionPerformed
 
     private void btJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btJActionPerformed
         letraSelecionada("J", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btJ.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btJActionPerformed
 
     private void btPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPActionPerformed
         letraSelecionada("P", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btP.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btPActionPerformed
 
     private void btRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRActionPerformed
         letraSelecionada("R", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btR.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btRActionPerformed
 
     private void btTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTActionPerformed
         letraSelecionada("T", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btT.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btTActionPerformed
 
     private void btXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXActionPerformed
         letraSelecionada("X", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btX.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btXActionPerformed
 
-    private void brRodarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brRodarActionPerformed
+    private void btRodarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRodarActionPerformed
         int valorSorteado = 0;
         try {
             valorSorteado = rodarRoleta();
@@ -1215,27 +1706,30 @@ public class TelaJogadores extends javax.swing.JFrame {
         }
         
         if(valorSorteado == 2 || valorSorteado == 8 || valorSorteado == 12 || valorSorteado == 17){
-            valorReais = 100;
+            valorReaisSorteado = 100;
         }
         else if(valorSorteado == 4 || valorSorteado == 10 || valorSorteado == 14 || valorSorteado == 18){
-            valorReais = 200;
+            valorReaisSorteado = 200;
         }
         else if(valorSorteado == 3 || valorSorteado == 6 || valorSorteado == 9 || valorSorteado == 13){
-            valorReais = 400;
+            valorReaisSorteado = 400;
         } 
         else if(valorSorteado == 16 || valorSorteado == 19){
-            valorReais = 500;
+            valorReaisSorteado = 500;
         }
         else if(valorSorteado == 1 || valorSorteado == 7){
-            valorReais = 1000;
+            valorReaisSorteado = 1000;
         }
         else if(valorSorteado == 5 || valorSorteado == 15){
-            valorReais = -1; //passa
+            valorReaisSorteado = -1; //passa
         }
         else if(valorSorteado == 11 || valorSorteado == 20){
-            valorReais = -2; //perde
+            valorReaisSorteado = -2; //perde
         }
-    }//GEN-LAST:event_brRodarActionPerformed
+        
+        mostraTecladoLetras();
+        btRodar.setEnabled(false);
+    }//GEN-LAST:event_btRodarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         TelaInicial telaInicial = new TelaInicial();
@@ -1253,67 +1747,103 @@ public class TelaJogadores extends javax.swing.JFrame {
 
     private void btCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCActionPerformed
         letraSelecionada("C", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btC.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btCActionPerformed
 
     private void btDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDActionPerformed
         letraSelecionada("D", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btD.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btDActionPerformed
 
     private void btEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEActionPerformed
         letraSelecionada("E", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btE.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btEActionPerformed
 
     private void btGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGActionPerformed
         letraSelecionada("G", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btG.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btGActionPerformed
 
     private void btKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKActionPerformed
         letraSelecionada("K", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btK.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btKActionPerformed
 
     private void btLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLActionPerformed
         letraSelecionada("L", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btL.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btLActionPerformed
 
     private void btMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMActionPerformed
         letraSelecionada("M", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btM.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btMActionPerformed
 
     private void btNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNActionPerformed
         letraSelecionada("N", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btN.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btNActionPerformed
 
     private void btOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOActionPerformed
         letraSelecionada("O", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btO.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btOActionPerformed
 
     private void btQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQActionPerformed
         letraSelecionada("Q", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btQ.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btQActionPerformed
 
     private void btSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSActionPerformed
         letraSelecionada("S", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btS.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btSActionPerformed
 
     private void btUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUActionPerformed
         letraSelecionada("U", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btU.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btUActionPerformed
 
     private void btVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVActionPerformed
         letraSelecionada("V", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btV.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btVActionPerformed
 
     private void btWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btWActionPerformed
         letraSelecionada("W", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btW.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btWActionPerformed
 
     private void btYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btYActionPerformed
         letraSelecionada("Y", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btY.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btYActionPerformed
 
     private void btZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btZActionPerformed
         letraSelecionada("Z", listaPalavrasUsadasNoMomento, qtdPalavras);
+        btZ.setEnabled(false);
+        escondeTecladoLetras();
     }//GEN-LAST:event_btZActionPerformed
+
+    private void btResponderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResponderActionPerformed
+        
+    }//GEN-LAST:event_btResponderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1351,7 +1881,6 @@ public class TelaJogadores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton brRodar;
     private javax.swing.JToggleButton btA;
     private javax.swing.JToggleButton btB;
     private javax.swing.JToggleButton btC;
@@ -1371,6 +1900,7 @@ public class TelaJogadores extends javax.swing.JFrame {
     private javax.swing.JToggleButton btQ;
     private javax.swing.JToggleButton btR;
     private javax.swing.JButton btResponder;
+    private javax.swing.JButton btRodar;
     private javax.swing.JToggleButton btS;
     private javax.swing.JToggleButton btT;
     private javax.swing.JToggleButton btU;
