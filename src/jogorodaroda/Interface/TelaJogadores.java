@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -34,9 +35,13 @@ public class TelaJogadores extends javax.swing.JFrame {
     String [] listaPosicaoLetrasEncontradasPalavra2;
     String [] listaPosicaoLetrasEncontradasPalavra3;
     int valorReaisSorteado = 0;
+    int jogadorCorrente = 1; //Jogador que está com a roleta
     int valorReaisAcumuladoJogadorCorrente = 0;
     int qtdPalavras;
-
+    int qtdJogadores;
+    boolean jogadorErrou = false; //Usada para passar o jogo para o proximo jogador se este errar a leta, passar ou perder tudo
+    int qtdErrosJogador1 = 0;
+    
     public void qtdPalavras(int qtdpalavra) {
         switch (qtdpalavra) {
 
@@ -105,6 +110,7 @@ public class TelaJogadores extends javax.swing.JFrame {
     public TelaJogadores(int jogadores, int palavras, int etapas) throws IOException {
         initComponents();
         qtdPalavras = palavras;
+        qtdJogadores = jogadores;
 
         escondeTecladoLetras();
         etapa.setText("1 / " + etapas);
@@ -592,6 +598,8 @@ public class TelaJogadores extends javax.swing.JFrame {
         palavra1 = palavrasEtapa.get(1).toString();
         palavra2 = palavrasEtapa.get(2).toString();
         palavra3 = palavrasEtapa.get(3).toString();
+        valorReaisAcumuladoJogadorCorrente = 0;
+        
         
         switch(qtdPalavras){
             case 1:            
@@ -606,9 +614,14 @@ public class TelaJogadores extends javax.swing.JFrame {
                        }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
-                        listaPosicaoLetrasEncontradasPalavra1[i] = " ";
+                        listaPosicaoLetrasEncontradasPalavra1[i] = " ";        
                     }
                 }
+
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                    jogadorErrou = true;
+                }    
+
                     
                 try{
                     p1l1.setText(listaPosicaoLetrasEncontradasPalavra1[0]);
@@ -648,6 +661,9 @@ public class TelaJogadores extends javax.swing.JFrame {
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
                 }
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                jogadorErrou = true;
+                }
                 
                 System.err.println(palavra2);
                 for(int i = 0; i < palavra2.length(); i ++){
@@ -662,6 +678,10 @@ public class TelaJogadores extends javax.swing.JFrame {
                     else if(listaPosicaoLetrasEncontradasPalavra2[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra2[i] = " ";
                     }
+                }
+                
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                jogadorErrou = true;
                 }
                 
                 try{
@@ -724,6 +744,10 @@ public class TelaJogadores extends javax.swing.JFrame {
                     }
                 }
                 
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                jogadorErrou = true;
+                }
+                
                 System.err.println(palavra2);
                 for(int i = 0; i < palavra2.length(); i ++){
                     achouLetra = palavra2.substring(i, i + 1);
@@ -739,6 +763,10 @@ public class TelaJogadores extends javax.swing.JFrame {
                     }
                 }
                 
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                jogadorErrou = true;
+                }
+                
                 System.err.println(palavra3);
                 for(int i = 0; i < palavra3.length(); i ++){
                     achouLetra = palavra3.substring(i, i + 1);
@@ -752,6 +780,10 @@ public class TelaJogadores extends javax.swing.JFrame {
                     else if(listaPosicaoLetrasEncontradasPalavra3[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra3[i] = " ";
                     }
+                }
+                
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                jogadorErrou = true;
                 }
                     
                 try{    
@@ -815,9 +847,9 @@ public class TelaJogadores extends javax.swing.JFrame {
                     
                 }
                     
-            break;            
-            
+            break;   
         }
+        trataPontuacaoJogadores();
 
     }
     
@@ -879,6 +911,280 @@ public class TelaJogadores extends javax.swing.JFrame {
         btW.setVisible(true);
         btY.setVisible(true);
         btZ.setVisible(true);
+    }
+    
+    public void trataPontuacaoJogadores(){
+        saldoJogador1.setBackground(Color.WHITE);
+        saldoJogador2.setBackground(Color.WHITE);
+        saldoJogador3.setBackground(Color.WHITE);
+        
+        switch(qtdJogadores){
+            
+            case 1:
+                saldoJogador1.setOpaque(true);              
+                if(qtdErrosJogador1 > 3){
+                    JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
+                }
+                else{                
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText()) ));
+                }
+            break;
+                
+            case 2:    
+                boolean validador = false;//Usado para não deixar entrar 2 vezes na logica do jogador 1
+                if(jogadorErrou == true && jogadorCorrente == 1){ //caso jogador corrente erre a letra passa a vez para o proximo
+                    jogadorCorrente = 2;
+                    jogadorErrou = false;
+                    saldoJogador1.setOpaque(false);  
+                    saldoJogador2.setOpaque(true);
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint(); 
+                    
+                }
+                
+                if(jogadorCorrente == 1){
+                    saldoJogador1.setOpaque(true);  
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint(); 
+                    validador = true;
+                
+                    if(valorReaisSorteado < 0){
+                        saldoJogador1.setText("0");
+                    }
+                    if(valorReaisSorteado == 0){
+                        jogadorCorrente = 2;
+                        jogadorErrou = true;
+                        saldoJogador1.setOpaque(false);  
+                        saldoJogador2.setOpaque(true);
+                        saldoJogador1.repaint(); 
+                        saldoJogador2.repaint();
+                    }
+
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText()) ));
+                }
+                
+                
+                
+                if(jogadorErrou == true && jogadorCorrente == 2){//caso jogador corrente erre a letra passa a vez para o proximo
+                    jogadorCorrente = 1;
+                    jogadorErrou = false;
+                    saldoJogador1.setOpaque(true);  
+                    saldoJogador2.setOpaque(false); 
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint(); 
+                    
+                }
+                
+                if(jogadorCorrente == 2){
+                    saldoJogador1.setOpaque(false);  
+                    saldoJogador2.setOpaque(true);
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint(); 
+                
+                    if(valorReaisSorteado < 0){
+                        saldoJogador2.setText("0");
+                    }
+                    if(valorReaisSorteado == 0){
+                        jogadorCorrente = 1;
+                        jogadorErrou = true;
+                        saldoJogador1.setOpaque(true);  
+                        saldoJogador2.setOpaque(false);
+                        saldoJogador1.repaint(); 
+                        saldoJogador2.repaint();
+                    }
+                    saldoJogador2.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador2.getText())));
+                }
+                
+                
+                
+                if(jogadorErrou == true && jogadorCorrente == 1){ //caso jogador corrente erre a letra passa a vez para o proximo
+                    jogadorCorrente = 2;
+                    jogadorErrou = false;
+                    saldoJogador1.setOpaque(false);  
+                    saldoJogador2.setOpaque(true); 
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint(); 
+                    
+                }
+   
+                if(jogadorCorrente == 1 && validador == false){
+                    saldoJogador1.setOpaque(true);  
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint(); 
+                
+                    if(valorReaisSorteado < 0){
+                        saldoJogador1.setText("0");
+                    }
+                    if(valorReaisSorteado == 0){
+                        jogadorCorrente = 2;
+                        jogadorErrou = true;
+                        saldoJogador1.setOpaque(false);  
+                        saldoJogador2.setOpaque(true);
+                        saldoJogador1.repaint(); 
+                        saldoJogador2.repaint();
+                    }
+
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText()) ));
+                }
+                
+            break;
+                
+            case 3:
+                boolean validador2 = false;//Usado para não deixar entrar 2 vezes na logica do jogador 1
+                if(jogadorErrou == true && jogadorCorrente == 1){//caso jogador corrente erre a letra passa a vez para o proximo
+                    jogadorCorrente = 2;
+                    jogadorErrou = false;
+                    saldoJogador1.setOpaque(false);  
+                    saldoJogador2.setOpaque(true); 
+                    saldoJogador3.setOpaque(false);
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
+                }
+                
+                if(jogadorCorrente == 1){
+                    saldoJogador1.setOpaque(true);  
+                    saldoJogador2.setOpaque(false);    
+                    saldoJogador3.setOpaque(false);
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
+                    validador2 = true;
+                    
+                
+                    if(valorReaisSorteado < 0){
+                        saldoJogador1.setText("0");
+                        
+                    }
+                    if(valorReaisSorteado == 0){
+                        jogadorCorrente = 2;
+                        jogadorErrou = true;
+                        saldoJogador1.setOpaque(false);  
+                        saldoJogador2.setOpaque(true); 
+                        saldoJogador3.setOpaque(false);
+                        saldoJogador1.repaint(); 
+                        saldoJogador2.repaint();
+                        saldoJogador3.repaint();
+                    }
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText())));
+                }
+                
+                
+                
+                if(jogadorErrou == true && jogadorCorrente == 2){//caso jogador corrente erre a letra passa a vez para o proximo
+                    jogadorCorrente = 3;
+                    jogadorErrou = false;
+                    saldoJogador1.setOpaque(false);  
+                    saldoJogador2.setOpaque(false); 
+                    saldoJogador3.setOpaque(true);
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
+                }
+                
+                if(jogadorCorrente == 2 && jogadorErrou == false){
+                    saldoJogador1.setOpaque(false);  
+                    saldoJogador2.setOpaque(true);                      
+                    saldoJogador3.setOpaque(false); 
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
+                
+                    if(valorReaisSorteado < 0){
+                        saldoJogador2.setText("0");
+                    }
+                    if(valorReaisSorteado == 0){//caso jogador corrente erre a letra passa a vez para o proximo
+                        jogadorCorrente = 3;
+                        jogadorErrou = true;
+                        saldoJogador1.setOpaque(false);  
+                        saldoJogador2.setOpaque(false); 
+                        saldoJogador3.setOpaque(true);
+                        saldoJogador1.repaint(); 
+                        saldoJogador2.repaint();
+                        saldoJogador3.repaint();
+                    }
+                    saldoJogador2.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador2.getText())));
+                }
+                
+                if(jogadorErrou == true && jogadorCorrente == 3){
+                    jogadorCorrente = 1;
+                    jogadorErrou = false;
+                    saldoJogador1.setOpaque(true);  
+                    saldoJogador2.setOpaque(false); 
+                    saldoJogador3.setOpaque(false); 
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
+                }
+                
+                if(jogadorCorrente == 3){
+                    saldoJogador1.setOpaque(false);  
+                    saldoJogador2.setOpaque(false);                      
+                    saldoJogador3.setOpaque(true); 
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
+                
+                    if(valorReaisSorteado < 0){
+                        saldoJogador3.setText("0");
+                    }
+                    if(valorReaisSorteado == 0){
+                        jogadorCorrente = 1;
+                        jogadorErrou = true;
+                        saldoJogador1.setOpaque(true);  
+                        saldoJogador2.setOpaque(false);                      
+                        saldoJogador3.setOpaque(false); 
+                        saldoJogador1.repaint(); 
+                        saldoJogador2.repaint();
+                        saldoJogador3.repaint();
+                        
+                    }
+                    saldoJogador3.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador3.getText())));
+                }
+                
+                
+                if(jogadorErrou == true && jogadorCorrente == 1){//caso jogador corrente erre a letra passa a vez para o proximo
+                    jogadorCorrente = 2;
+                    jogadorErrou = false;
+                    saldoJogador1.setOpaque(false);  
+                    saldoJogador2.setOpaque(true); 
+                    saldoJogador3.setOpaque(false);
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
+                }
+                
+                if(jogadorCorrente == 1 && validador2 == false){
+                    saldoJogador1.setOpaque(true);  
+                    saldoJogador2.setOpaque(false);    
+                    saldoJogador3.setOpaque(false); 
+                    saldoJogador1.repaint(); 
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
+                    
+                
+                    if(valorReaisSorteado < 0){
+                        saldoJogador1.setText("0");
+                        
+                    }
+                    if(valorReaisSorteado == 0){
+                        jogadorCorrente = 2;
+                        jogadorErrou = true;
+                        saldoJogador1.setOpaque(false);  
+                        saldoJogador2.setOpaque(true);                      
+                        saldoJogador3.setOpaque(false); 
+                        saldoJogador1.repaint(); 
+                        saldoJogador2.repaint();
+                        saldoJogador3.repaint();
+                    }
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText())));
+                }
+                
+            break;
+        }
+        
     }
     
     /**
@@ -1721,14 +2027,56 @@ public class TelaJogadores extends javax.swing.JFrame {
             valorReaisSorteado = 1000;
         }
         else if(valorSorteado == 5 || valorSorteado == 15){
-            valorReaisSorteado = -1; //passa
+            valorReaisSorteado = 0; //passa
         }
         else if(valorSorteado == 11 || valorSorteado == 20){
-            valorReaisSorteado = -2; //perde
+            valorReaisSorteado = -1; //perde
         }
         
-        mostraTecladoLetras();
-        btRodar.setEnabled(false);
+        
+        if(valorReaisSorteado != 0){
+            mostraTecladoLetras();
+            btRodar.setEnabled(false);
+        }
+        else{
+            if(qtdJogadores == 2){//caso a sorte seja passa a vez´passa para proximo jogador
+                if(jogadorCorrente == 1){
+                    jogadorCorrente = 2;
+                }
+                else if(jogadorCorrente == 2){
+                    jogadorCorrente = 1;
+                }
+            }
+            
+            if(qtdJogadores == 3){//caso a sorte seja passa a vez´passa para proximo jogador
+                if(jogadorCorrente == 1){
+                    jogadorCorrente = 2;
+                }
+                else if(jogadorCorrente == 2){
+                    jogadorCorrente = 3;
+                }
+                else if(jogadorCorrente == 3){
+                    jogadorCorrente = 1;
+                }
+            }
+        }
+        
+        
+        if(valorReaisSorteado == -1 && jogadorCorrente == 1){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+            saldoJogador1.setText("0");
+            escondeTecladoLetras();
+            btRodar.setEnabled(true);
+        }
+        else if(valorReaisSorteado == -1 && jogadorCorrente == 2){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+            saldoJogador2.setText("0");
+            escondeTecladoLetras();
+            btRodar.setEnabled(true);
+        }
+        else if(valorReaisSorteado == -1 && jogadorCorrente == 3){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+            saldoJogador3.setText("0");
+            escondeTecladoLetras();
+            btRodar.setEnabled(true);
+        }
     }//GEN-LAST:event_btRodarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
