@@ -41,6 +41,10 @@ public class TelaJogadores extends javax.swing.JFrame {
     int qtdJogadores;
     boolean jogadorErrou = false; //Usada para passar o jogo para o proximo jogador se este errar a leta, passar ou perder tudo
     int qtdErrosJogador1 = 0;
+    boolean respostaATiva = false;
+    boolean jogador1EliminadoRodada = false;
+    boolean jogador2EliminadoRodada = false;
+    boolean jogador3EliminadoRodada = false;
     
     public void qtdPalavras(int qtdpalavra) {
         switch (qtdpalavra) {
@@ -111,6 +115,9 @@ public class TelaJogadores extends javax.swing.JFrame {
         initComponents();
         qtdPalavras = palavras;
         qtdJogadores = jogadores;
+        saldoJogador1.setOpaque(true);
+        saldoJogador1.setBackground(Color.WHITE);
+        saldoJogador1.repaint();
 
         escondeTecladoLetras();
         etapa.setText("1 / " + etapas);
@@ -599,6 +606,8 @@ public class TelaJogadores extends javax.swing.JFrame {
         palavra2 = palavrasEtapa.get(2).toString();
         palavra3 = palavrasEtapa.get(3).toString();
         valorReaisAcumuladoJogadorCorrente = 0;
+        boolean encontrouLetraPalavraAnterior1 = true;
+        boolean encontrouLetraPalavraAnterior2 = true;
         
         
         switch(qtdPalavras){
@@ -620,7 +629,52 @@ public class TelaJogadores extends javax.swing.JFrame {
 
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
                     jogadorErrou = true;
-                }    
+                    qtdErrosJogador1 = qtdErrosJogador1 + 1;
+                } 
+                
+                if(respostaATiva == true){//Trata resposta do jogador
+                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){
+                        if(qtdJogadores == 1){
+                            JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
+                            saldoJogador1.setOpaque(true);
+                            saldoJogador1.setBackground(Color.red);
+                            saldoJogador1.repaint();
+                            jogador1EliminadoRodada = true;
+                            escondeTecladoLetras();
+                        }
+                        else{
+//                            if(jogadorCorrente == 1){
+//                                saldoJogador1.setOpaque(true);
+//                                saldoJogador1.setBackground(Color.red);
+//                                saldoJogador1.repaint();
+//                                jogador1EliminadoRodada = true;
+//                                escondeTecladoLetras();
+//                            }
+    //                        else if(jogadorCorrente == 2){
+    //                            saldoJogador2.setOpaque(true);
+    //                            saldoJogador2.setBackground(Color.red);
+    //                            saldoJogador2.repaint();  
+    //                            jogador2EliminadoRodada = true;
+    //                        }
+    //                        else if(jogadorCorrente == 3){
+    //                            saldoJogador3.setOpaque(true);
+    //                            saldoJogador3.setBackground(Color.red);
+    //                            saldoJogador3.repaint();
+    //                            jogador3EliminadoRodada = true;
+    //                        }
+//                        
+                        escondeTecladoLetras();
+                        roleta.setEnabled(true);
+                        respostaATiva = false;
+                        btResponder.setEnabled(true);
+                        }
+                    }
+                    else{
+                        btRodar.setEnabled(false);
+                        mostraTecladoLetras();
+                    }
+                    
+                }
 
                     
                 try{
@@ -662,7 +716,8 @@ public class TelaJogadores extends javax.swing.JFrame {
                     }
                 }
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
-                jogadorErrou = true;
+//                    jogadorErrou = true;
+                    encontrouLetraPalavraAnterior1 = false;
                 }
                 
                 System.err.println(palavra2);
@@ -680,8 +735,46 @@ public class TelaJogadores extends javax.swing.JFrame {
                     }
                 }
                 
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
-                jogadorErrou = true;
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida) && encontrouLetraPalavraAnterior1 == false){//Se jogador errar pula para proximo jogador
+                    jogadorErrou = true;
+                    qtdErrosJogador1 = qtdErrosJogador1 + 1;
+                }
+                
+                if(respostaATiva == true){//Trata resposta do jogador
+                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida)){
+                        if(qtdJogadores == 1){
+                            JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
+                            saldoJogador1.setOpaque(true);
+                            saldoJogador1.setBackground(Color.red);
+                            saldoJogador1.repaint();
+                            jogador1EliminadoRodada = true;
+                            escondeTecladoLetras();
+                        }
+                        else{
+//                        else if(jogadorCorrente == 2){
+//                            saldoJogador2.setOpaque(true);
+//                            saldoJogador2.setBackground(Color.red);
+//                            saldoJogador2.repaint();   
+//                            jogador2EliminadoRodada = true;
+//                        }
+//                        else if(jogadorCorrente == 3){
+//                            saldoJogador3.setOpaque(true);
+//                            saldoJogador3.setBackground(Color.red);
+//                            saldoJogador3.repaint(); 
+//                            jogador3EliminadoRodada = true;
+//                        }
+//                        
+                            escondeTecladoLetras();
+                            roleta.setEnabled(true);
+                            respostaATiva = false;
+                            btResponder.setEnabled(true);
+                        }
+                    }
+                    else{
+                        btRodar.setEnabled(false);
+                        mostraTecladoLetras();
+                    }
+                    
                 }
                 
                 try{
@@ -745,7 +838,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                 }
                 
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
-                jogadorErrou = true;
+                    encontrouLetraPalavraAnterior1 = false;
                 }
                 
                 System.err.println(palavra2);
@@ -763,8 +856,8 @@ public class TelaJogadores extends javax.swing.JFrame {
                     }
                 }
                 
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
-                jogadorErrou = true;
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                    encontrouLetraPalavraAnterior2 = false;
                 }
                 
                 System.err.println(palavra3);
@@ -782,8 +875,47 @@ public class TelaJogadores extends javax.swing.JFrame {
                     }
                 }
                 
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(letraEscolhida) && encontrouLetraPalavraAnterior1 == false && encontrouLetraPalavraAnterior2 == false){//Se jogador errar pula para proximo jogador
                 jogadorErrou = true;
+                qtdErrosJogador1 = qtdErrosJogador1 + 1;
+                }
+                
+                
+                if(respostaATiva == true){//Trata resposta do jogador
+                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(letraEscolhida) && qtdJogadores == 1){
+                        if(qtdJogadores == 1){
+                            JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
+                            saldoJogador1.setOpaque(true);
+                            saldoJogador1.setBackground(Color.red);
+                            saldoJogador1.repaint();
+                            jogador1EliminadoRodada = true;
+                            escondeTecladoLetras();
+                        }
+                        else{
+//                        else if(jogadorCorrente == 2){
+//                            saldoJogador2.setOpaque(true);
+//                            saldoJogador2.setBackground(Color.red);
+//                            saldoJogador2.repaint();   
+//                            jogador2EliminadoRodada = true;
+//                        }
+//                        else if(jogadorCorrente == 3){
+//                            saldoJogador3.setOpaque(true);
+//                            saldoJogador3.setBackground(Color.red);
+//                            saldoJogador3.repaint();
+//                            jogador3EliminadoRodada = true;
+//                        }
+//                        
+                            escondeTecladoLetras();
+                            roleta.setEnabled(true);
+                            respostaATiva = false;
+                            btResponder.setEnabled(true);
+                        }
+                    }
+                    else{
+                        btRodar.setEnabled(false);
+                        mostraTecladoLetras();
+                    }
+                    
                 }
                     
                 try{    
@@ -849,7 +981,79 @@ public class TelaJogadores extends javax.swing.JFrame {
                     
             break;   
         }
-        trataPontuacaoJogadores();
+        if(respostaATiva == false){
+            switch(qtdPalavras){//Valida se jogador corrente canhou a partida acertando todas as letras
+                    case 1:
+                        if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null)){
+                            JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                            roleta.setEnabled(false);
+                            escondeTecladoLetras();
+                            btRodar.setEnabled(false);
+                            btResponder.setEnabled(false);
+
+                        }
+                    break;
+
+                    case 2:
+                        if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null)){
+                            JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                            roleta.setEnabled(false);
+                            escondeTecladoLetras();
+                            btRodar.setEnabled(false);
+                            btResponder.setEnabled(false);
+                        }
+                    break;
+
+                    case 3:
+                        if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(null)){
+                            JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                            roleta.setEnabled(false);
+                            escondeTecladoLetras();
+                            btRodar.setEnabled(false);
+                            btResponder.setEnabled(false);
+                        }
+                    break;    
+                }
+        }
+        
+        if(respostaATiva == true){ //Valida se jogador corrente canhou a partida respondendo as palavras
+            switch(qtdPalavras){
+                case 1:
+                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null)){
+                        JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                        roleta.setEnabled(false);
+                        escondeTecladoLetras();
+                        btRodar.setEnabled(false);
+                        btResponder.setEnabled(false);
+                    }
+                break;
+                
+                case 2:
+                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null)){
+                        JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                        roleta.setEnabled(false);
+                        escondeTecladoLetras();
+                        btRodar.setEnabled(false);
+                        btResponder.setEnabled(false);
+                    }
+                break;
+                    
+                case 3:
+                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(null)){
+                        JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                        roleta.setEnabled(false);
+                        escondeTecladoLetras();
+                        btRodar.setEnabled(false);
+                        btResponder.setEnabled(false);
+                    }
+                break;    
+            }
+        }
+        
+        
+        if(respostaATiva == false){
+            trataPontuacaoJogadores();
+        }
 
     }
     
@@ -924,6 +1128,8 @@ public class TelaJogadores extends javax.swing.JFrame {
                 saldoJogador1.setOpaque(true);              
                 if(qtdErrosJogador1 > 3){
                     JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
+                    btRodar.setEnabled(false);
+                    btResponder.setEnabled(false);
                 }
                 else{                
                     saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText()) ));
@@ -1278,11 +1484,12 @@ public class TelaJogadores extends javax.swing.JFrame {
         saldoJogador2 = new javax.swing.JLabel();
         saldoJogador3 = new javax.swing.JLabel();
         btVoltar = new javax.swing.JButton();
+        btAvancar = new javax.swing.JButton();
         imagemFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Jogo Roda a Roda");
-        setPreferredSize(new java.awt.Dimension(1225, 720));
+        setPreferredSize(new java.awt.Dimension(1226, 723));
         getContentPane().setLayout(null);
 
         seletor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Seletor.png"))); // NOI18N
@@ -1297,13 +1504,13 @@ public class TelaJogadores extends javax.swing.JFrame {
         etapa.setForeground(new java.awt.Color(0, 0, 255));
         etapa.setText("1 / 1");
         getContentPane().add(etapa);
-        etapa.setBounds(1100, 50, 100, 30);
+        etapa.setBounds(1110, 70, 100, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Etapa:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(1010, 40, 80, 50);
+        jLabel1.setBounds(1020, 60, 80, 50);
 
         p1l1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         p1l1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1932,75 +2139,84 @@ public class TelaJogadores extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btVoltar);
-        btVoltar.setBounds(1000, 10, 220, 40);
+        btVoltar.setBounds(1030, 30, 140, 30);
 
-        imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Tela3Jogador.png"))); // NOI18N
+        btAvancar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/btAvancar.png"))); // NOI18N
+        btAvancar.setBorderPainted(false);
+        btAvancar.setContentAreaFilled(false);
+        btAvancar.setEnabled(false);
+        btAvancar.setFocusPainted(false);
+        btAvancar.setFocusable(false);
+        btAvancar.setRequestFocusEnabled(false);
+        getContentPane().add(btAvancar);
+        btAvancar.setBounds(1030, 110, 130, 40);
+
+        imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Tela3Jogador.PNG"))); // NOI18N
         getContentPane().add(imagemFundo);
-        imagemFundo.setBounds(0, 0, 1210, 681);
+        imagemFundo.setBounds(0, -10, 1214, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAActionPerformed
-        letraSelecionada("A", listaPalavrasUsadasNoMomento, qtdPalavras);
         btA.setEnabled(false);
         escondeTecladoLetras();
-        
+        letraSelecionada("A", listaPalavrasUsadasNoMomento, qtdPalavras);       
 
     }//GEN-LAST:event_btAActionPerformed
 
     private void btBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBActionPerformed
-        letraSelecionada("B", listaPalavrasUsadasNoMomento, qtdPalavras);
         btB.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("B", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btBActionPerformed
 
     private void btFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFActionPerformed
-        letraSelecionada("F", listaPalavrasUsadasNoMomento, qtdPalavras);
         btF.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("F", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btFActionPerformed
 
     private void btHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHActionPerformed
-        letraSelecionada("H", listaPalavrasUsadasNoMomento, qtdPalavras);
         btH.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("H", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btHActionPerformed
 
     private void btIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIActionPerformed
-        letraSelecionada("I", listaPalavrasUsadasNoMomento, qtdPalavras);
         btI.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("I", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btIActionPerformed
 
     private void btJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btJActionPerformed
-        letraSelecionada("J", listaPalavrasUsadasNoMomento, qtdPalavras);
         btJ.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("J", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btJActionPerformed
 
     private void btPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPActionPerformed
-        letraSelecionada("P", listaPalavrasUsadasNoMomento, qtdPalavras);
         btP.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("P", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btPActionPerformed
 
     private void btRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRActionPerformed
-        letraSelecionada("R", listaPalavrasUsadasNoMomento, qtdPalavras);
         btR.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("R", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btRActionPerformed
 
     private void btTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTActionPerformed
-        letraSelecionada("T", listaPalavrasUsadasNoMomento, qtdPalavras);
         btT.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("T", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btTActionPerformed
 
     private void btXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXActionPerformed
-        letraSelecionada("X", listaPalavrasUsadasNoMomento, qtdPalavras);
         btX.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("X", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btXActionPerformed
 
     private void btRodarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRodarActionPerformed
@@ -2033,50 +2249,87 @@ public class TelaJogadores extends javax.swing.JFrame {
             valorReaisSorteado = -1; //perde
         }
         
-        
-        if(valorReaisSorteado != 0){
+        if(valorReaisSorteado > 0){
             mostraTecladoLetras();
             btRodar.setEnabled(false);
         }
         else{
-            if(qtdJogadores == 2){//caso a sorte seja passa a vez´passa para proximo jogador
-                if(jogadorCorrente == 1){
-                    jogadorCorrente = 2;
-                }
-                else if(jogadorCorrente == 2){
-                    jogadorCorrente = 1;
+            if(qtdJogadores == 1){
+                if(valorReaisSorteado == -1 && jogadorCorrente == 1){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                    saldoJogador1.setText("0");
                 }
             }
             
-            if(qtdJogadores == 3){//caso a sorte seja passa a vez´passa para proximo jogador
+            if(qtdJogadores == 2){//caso a sorte seja passa a vez´ ou perde tudo passa para proximo jogador
+                
+                if(valorReaisSorteado == -1 && jogadorCorrente == 1){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                    saldoJogador1.setText("0");
+                }
+                else if(valorReaisSorteado == -1 && jogadorCorrente == 2){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                    saldoJogador2.setText("0");
+                }
+                else if(valorReaisSorteado == -1 && jogadorCorrente == 3){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                    saldoJogador3.setText("0");
+                }
+                
                 if(jogadorCorrente == 1){
                     jogadorCorrente = 2;
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(true);
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+                }
+                else if(jogadorCorrente == 2){
+                    jogadorCorrente = 1;
+                    saldoJogador1.setOpaque(true);
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+                }
+            }
+            
+            if(qtdJogadores == 3){//caso a sorte seja passa a vez´ ou perde tudo passa para proximo jogador
+                
+                if(valorReaisSorteado == -1 && jogadorCorrente == 1){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                    saldoJogador1.setText("0");
+                }
+                else if(valorReaisSorteado == -1 && jogadorCorrente == 2){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                    saldoJogador2.setText("0");
+                }
+                else if(valorReaisSorteado == -1 && jogadorCorrente == 3){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                    saldoJogador3.setText("0");
+                }
+                
+                if(jogadorCorrente == 1){
+                    jogadorCorrente = 2;
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(true);
+                    saldoJogador3.setOpaque(false);
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
                 }
                 else if(jogadorCorrente == 2){
                     jogadorCorrente = 3;
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador3.setOpaque(true);
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
                 }
                 else if(jogadorCorrente == 3){
                     jogadorCorrente = 1;
+                    saldoJogador1.setOpaque(true);
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador3.setOpaque(false);
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+                    saldoJogador3.repaint();
                 }
             }
         }
-        
-        
-        if(valorReaisSorteado == -1 && jogadorCorrente == 1){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
-            saldoJogador1.setText("0");
-            escondeTecladoLetras();
-            btRodar.setEnabled(true);
-        }
-        else if(valorReaisSorteado == -1 && jogadorCorrente == 2){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
-            saldoJogador2.setText("0");
-            escondeTecladoLetras();
-            btRodar.setEnabled(true);
-        }
-        else if(valorReaisSorteado == -1 && jogadorCorrente == 3){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
-            saldoJogador3.setText("0");
-            escondeTecladoLetras();
-            btRodar.setEnabled(true);
-        }
+ 
     }//GEN-LAST:event_btRodarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
@@ -2094,103 +2347,107 @@ public class TelaJogadores extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCActionPerformed
-        letraSelecionada("C", listaPalavrasUsadasNoMomento, qtdPalavras);
         btC.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("C", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btCActionPerformed
 
     private void btDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDActionPerformed
-        letraSelecionada("D", listaPalavrasUsadasNoMomento, qtdPalavras);
         btD.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("D", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btDActionPerformed
 
     private void btEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEActionPerformed
-        letraSelecionada("E", listaPalavrasUsadasNoMomento, qtdPalavras);
         btE.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("E", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btEActionPerformed
 
     private void btGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGActionPerformed
-        letraSelecionada("G", listaPalavrasUsadasNoMomento, qtdPalavras);
         btG.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("G", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btGActionPerformed
 
     private void btKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKActionPerformed
-        letraSelecionada("K", listaPalavrasUsadasNoMomento, qtdPalavras);
         btK.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("K", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btKActionPerformed
 
     private void btLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLActionPerformed
-        letraSelecionada("L", listaPalavrasUsadasNoMomento, qtdPalavras);
         btL.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("L", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btLActionPerformed
 
     private void btMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMActionPerformed
-        letraSelecionada("M", listaPalavrasUsadasNoMomento, qtdPalavras);
         btM.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("M", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btMActionPerformed
 
     private void btNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNActionPerformed
-        letraSelecionada("N", listaPalavrasUsadasNoMomento, qtdPalavras);
         btN.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("N", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btNActionPerformed
 
     private void btOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOActionPerformed
-        letraSelecionada("O", listaPalavrasUsadasNoMomento, qtdPalavras);
         btO.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("O", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btOActionPerformed
 
     private void btQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQActionPerformed
-        letraSelecionada("Q", listaPalavrasUsadasNoMomento, qtdPalavras);
         btQ.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("Q", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btQActionPerformed
 
     private void btSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSActionPerformed
-        letraSelecionada("S", listaPalavrasUsadasNoMomento, qtdPalavras);
         btS.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("S", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btSActionPerformed
 
     private void btUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUActionPerformed
-        letraSelecionada("U", listaPalavrasUsadasNoMomento, qtdPalavras);
         btU.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("U", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btUActionPerformed
 
     private void btVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVActionPerformed
-        letraSelecionada("V", listaPalavrasUsadasNoMomento, qtdPalavras);
         btV.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("V", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btVActionPerformed
 
     private void btWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btWActionPerformed
-        letraSelecionada("W", listaPalavrasUsadasNoMomento, qtdPalavras);
         btW.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("W", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btWActionPerformed
 
     private void btYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btYActionPerformed
-        letraSelecionada("Y", listaPalavrasUsadasNoMomento, qtdPalavras);
         btY.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("Y", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btYActionPerformed
 
     private void btZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btZActionPerformed
-        letraSelecionada("Z", listaPalavrasUsadasNoMomento, qtdPalavras);
         btZ.setEnabled(false);
         escondeTecladoLetras();
+        letraSelecionada("Z", listaPalavrasUsadasNoMomento, qtdPalavras);
     }//GEN-LAST:event_btZActionPerformed
 
     private void btResponderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResponderActionPerformed
-        
+           respostaATiva = true;
+           roleta.setEnabled(false);
+           btRodar.setEnabled(false);
+           btResponder.setEnabled(false);
+           mostraTecladoLetras();
     }//GEN-LAST:event_btResponderActionPerformed
 
     /**
@@ -2230,6 +2487,7 @@ public class TelaJogadores extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btA;
+    private javax.swing.JButton btAvancar;
     private javax.swing.JToggleButton btB;
     private javax.swing.JToggleButton btC;
     private javax.swing.JToggleButton btD;
