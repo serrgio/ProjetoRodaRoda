@@ -1,5 +1,6 @@
 package jogorodaroda.Interface;
 
+import com.sun.org.apache.bcel.internal.generic.SWITCH;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.awt.Color;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import jdk.nashorn.internal.runtime.ScriptRuntime;
 import jogorodaroda.Classe.Metodos;
 
 /**
@@ -45,6 +47,11 @@ public class TelaJogadores extends javax.swing.JFrame {
     boolean jogador1EliminadoRodada = false;
     boolean jogador2EliminadoRodada = false;
     boolean jogador3EliminadoRodada = false;
+    int etapaAtual = 1;
+    
+    int valorAcumuladoJogador1 = 0; //Variável usada para armazenar o valor acumulado durante todas as etapas
+    int valorAcumuladoJogador2 = 0; //Variável usada para armazenar o valor acumulado durante todas as etapas
+    int valorAcumuladoJogador3 = 0; //Variável usada para armazenar o valor acumulado durante todas as etapas
     
     public void qtdPalavras(int qtdpalavra) {
         switch (qtdpalavra) {
@@ -111,16 +118,17 @@ public class TelaJogadores extends javax.swing.JFrame {
 
     }
 
-    public TelaJogadores(int jogadores, int palavras, int etapas) throws IOException {
+    public TelaJogadores(int jogadores, int palavras, int qtdetapas) throws IOException {
         initComponents();
         qtdPalavras = palavras;
         qtdJogadores = jogadores;
         saldoJogador1.setOpaque(true);
         saldoJogador1.setBackground(Color.WHITE);
         saldoJogador1.repaint();
+        btAvancar.setVisible(false);
 
         escondeTecladoLetras();
-        etapa.setText("1 / " + etapas);
+        etapa.setText( etapaAtual + " / " + qtdetapas);
 
         switch (jogadores) {
             case 1:
@@ -990,6 +998,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                             escondeTecladoLetras();
                             btRodar.setEnabled(false);
                             btResponder.setEnabled(false);
+                            btAvancar.setVisible(true);
 
                         }
                     break;
@@ -1001,6 +1010,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                             escondeTecladoLetras();
                             btRodar.setEnabled(false);
                             btResponder.setEnabled(false);
+                            btAvancar.setVisible(true);
                         }
                     break;
 
@@ -1011,6 +1021,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                             escondeTecladoLetras();
                             btRodar.setEnabled(false);
                             btResponder.setEnabled(false);
+                            btAvancar.setVisible(true);
                         }
                     break;    
                 }
@@ -1025,6 +1036,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         escondeTecladoLetras();
                         btRodar.setEnabled(false);
                         btResponder.setEnabled(false);
+                        btAvancar.setVisible(true);
                     }
                 break;
                 
@@ -1035,6 +1047,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         escondeTecladoLetras();
                         btRodar.setEnabled(false);
                         btResponder.setEnabled(false);
+                        btAvancar.setVisible(true);
                     }
                 break;
                     
@@ -1045,6 +1058,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         escondeTecladoLetras();
                         btRodar.setEnabled(false);
                         btResponder.setEnabled(false);
+                        btAvancar.setVisible(true);
                     }
                 break;    
             }
@@ -1086,6 +1100,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         btZ.setVisible(false);
         
         btRodar.setEnabled(true);
+        btResponder.setEnabled(true);
     }
     
     public void mostraTecladoLetras(){
@@ -1115,6 +1130,8 @@ public class TelaJogadores extends javax.swing.JFrame {
         btW.setVisible(true);
         btY.setVisible(true);
         btZ.setVisible(true);
+        
+        btResponder.setEnabled(false);
     }
     
     public void trataPontuacaoJogadores(){
@@ -1132,7 +1149,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                     btResponder.setEnabled(false);
                 }
                 else{                
-                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText()) ));
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText()) ));
                 }
             break;
                 
@@ -1167,7 +1184,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         saldoJogador2.repaint();
                     }
 
-                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText()) ));
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText()) ));
                 }
                 
                 
@@ -1199,7 +1216,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         saldoJogador1.repaint(); 
                         saldoJogador2.repaint();
                     }
-                    saldoJogador2.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador2.getText())));
+                    saldoJogador2.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador2.getText())));
                 }
                 
                 
@@ -1232,7 +1249,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         saldoJogador2.repaint();
                     }
 
-                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText()) ));
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText()) ));
                 }
                 
             break;
@@ -1274,7 +1291,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         saldoJogador2.repaint();
                         saldoJogador3.repaint();
                     }
-                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText())));
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText())));
                 }
                 
                 
@@ -1311,7 +1328,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         saldoJogador2.repaint();
                         saldoJogador3.repaint();
                     }
-                    saldoJogador2.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador2.getText())));
+                    saldoJogador2.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador2.getText())));
                 }
                 
                 if(jogadorErrou == true && jogadorCorrente == 3){
@@ -1347,7 +1364,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         saldoJogador3.repaint();
                         
                     }
-                    saldoJogador3.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador3.getText())));
+                    saldoJogador3.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador3.getText())));
                 }
                 
                 
@@ -1385,7 +1402,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                         saldoJogador2.repaint();
                         saldoJogador3.repaint();
                     }
-                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Double.parseDouble(saldoJogador1.getText())));
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText())));
                 }
                 
             break;
@@ -1504,13 +1521,13 @@ public class TelaJogadores extends javax.swing.JFrame {
         etapa.setForeground(new java.awt.Color(0, 0, 255));
         etapa.setText("1 / 1");
         getContentPane().add(etapa);
-        etapa.setBounds(1110, 70, 100, 30);
+        etapa.setBounds(1110, 50, 100, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Etapa:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(1020, 60, 80, 50);
+        jLabel1.setBounds(1020, 40, 80, 50);
 
         p1l1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         p1l1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -2079,8 +2096,12 @@ public class TelaJogadores extends javax.swing.JFrame {
         btZ.setBounds(910, 630, 35, 25);
 
         btResponder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/btresponder.png"))); // NOI18N
+        btResponder.setBorderPainted(false);
         btResponder.setContentAreaFilled(false);
+        btResponder.setFocusPainted(false);
         btResponder.setFocusable(false);
+        btResponder.setRequestFocusEnabled(false);
+        btResponder.setVerifyInputWhenFocusTarget(false);
         btResponder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btResponderActionPerformed(evt);
@@ -2139,21 +2160,25 @@ public class TelaJogadores extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btVoltar);
-        btVoltar.setBounds(1030, 30, 140, 30);
+        btVoltar.setBounds(1030, 10, 140, 30);
 
         btAvancar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/btAvancar.png"))); // NOI18N
         btAvancar.setBorderPainted(false);
         btAvancar.setContentAreaFilled(false);
-        btAvancar.setEnabled(false);
         btAvancar.setFocusPainted(false);
         btAvancar.setFocusable(false);
         btAvancar.setRequestFocusEnabled(false);
+        btAvancar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAvancarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btAvancar);
-        btAvancar.setBounds(1030, 110, 130, 40);
+        btAvancar.setBounds(790, 290, 130, 40);
 
-        imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Tela3Jogador.PNG"))); // NOI18N
+        imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Tela3Jogador.png"))); // NOI18N
         getContentPane().add(imagemFundo);
-        imagemFundo.setBounds(0, -10, 1214, 700);
+        imagemFundo.setBounds(0, -10, 1210, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2449,6 +2474,200 @@ public class TelaJogadores extends javax.swing.JFrame {
            btResponder.setEnabled(false);
            mostraTecladoLetras();
     }//GEN-LAST:event_btResponderActionPerformed
+
+    private void btAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAvancarActionPerformed
+    
+        p1l1.setText("");
+        p1l2.setText("");
+        p1l3.setText("");
+        p1l4.setText("");
+        p1l5.setText("");
+        p1l6.setText("");
+        p1l7.setText("");
+        p1l8.setText("");
+        p1l9.setText("");
+        p1l10.setText("");
+        p1l11.setText("");
+        p1l12.setText("");
+        p1l13.setText("");
+        p1l14.setText("");
+        p1l15.setText("");
+        p2l1.setText("");
+        p2l2.setText("");
+        p2l3.setText("");
+        p2l4.setText("");
+        p2l5.setText("");
+        p2l6.setText("");
+        p2l7.setText("");
+        p2l8.setText("");
+        p2l9.setText("");
+        p2l10.setText("");
+        p2l11.setText("");
+        p2l12.setText("");
+        p2l13.setText("");
+        p2l14.setText("");
+        p2l15.setText("");
+        p3l1.setText("");
+        p3l2.setText("");
+        p3l3.setText("");
+        p3l4.setText("");
+        p3l5.setText("");
+        p3l6.setText("");
+        p3l7.setText("");
+        p3l8.setText("");
+        p3l9.setText("");
+        p3l10.setText("");
+        p3l11.setText("");
+        p3l12.setText("");
+        p3l13.setText("");
+        p3l14.setText("");
+        p3l15.setText("");
+        
+        p1l1.setOpaque(false);
+        p1l2.setOpaque(false);
+        p1l3.setOpaque(false);
+        p1l4.setOpaque(false);
+        p1l5.setOpaque(false);
+        p1l6.setOpaque(false);
+        p1l7.setOpaque(false);
+        p1l8.setOpaque(false);
+        p1l9.setOpaque(false);
+        p1l10.setOpaque(false);
+        p1l11.setOpaque(false);
+        p1l12.setOpaque(false);
+        p1l13.setOpaque(false);
+        p1l14.setOpaque(false);
+        p1l15.setOpaque(false);
+        
+        p2l1.setOpaque(false);
+        p2l2.setOpaque(false);
+        p2l3.setOpaque(false);
+        p2l4.setOpaque(false);
+        p2l5.setOpaque(false);
+        p2l6.setOpaque(false);
+        p2l7.setOpaque(false);
+        p2l8.setOpaque(false);
+        p2l9.setOpaque(false);
+        p2l10.setOpaque(false);
+        p2l11.setOpaque(false);
+        p2l12.setOpaque(false);
+        p2l13.setOpaque(false);
+        p2l14.setOpaque(false);
+        p2l15.setOpaque(false);
+
+        p3l1.setOpaque(false);
+        p3l2.setOpaque(false);
+        p3l3.setOpaque(false);
+        p3l4.setOpaque(false);
+        p3l5.setOpaque(false);
+        p3l6.setOpaque(false);
+        p3l7.setOpaque(false);
+        p3l8.setOpaque(false);
+        p3l9.setOpaque(false);
+        p3l10.setOpaque(false);
+        p3l11.setOpaque(false);
+        p3l12.setOpaque(false);
+        p3l13.setOpaque(false);
+        p3l14.setOpaque(false);
+        p3l15.setOpaque(false);
+        
+        btA.setEnabled(true);
+        btB.setEnabled(true);
+        btC.setEnabled(true);
+        btD.setEnabled(true);
+        btE.setEnabled(true);
+        btF.setEnabled(true);
+        btG.setEnabled(true);
+        btH.setEnabled(true);
+        btI.setEnabled(true);
+        btJ.setEnabled(true);
+        btK.setEnabled(true);
+        btL.setEnabled(true);
+        btM.setEnabled(true);
+        btN.setEnabled(true);
+        btO.setEnabled(true);
+        btP.setEnabled(true);
+        btQ.setEnabled(true);
+        btR.setEnabled(true);
+        btS.setEnabled(true);
+        btT.setEnabled(true);
+        btU.setEnabled(true);
+        btV.setEnabled(true);
+        btX.setEnabled(true);
+        btW.setEnabled(true);
+        btY.setEnabled(true);
+        btZ.setEnabled(true);
+     
+        etapaAtual = etapaAtual + Integer.parseInt(etapa.getText().substring(0, 1));  //Atualiza label da etapa  
+        etapa.setText( etapaAtual +" "+ etapa.getText().substring(2, 5)); //Atualiza label da etapa   
+
+        if(jogadorCorrente == 1){
+            valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
+        }
+        else if(jogadorCorrente == 2){
+            valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
+        }
+        else if(jogadorCorrente == 3){
+            valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
+        }
+
+        saldoJogador1.setText("");
+        saldoJogador2.setText("");
+        saldoJogador3.setText("");
+        
+        listaPalavras.clear();
+        listapalavrasSorteadas.clear();
+        listaPalavrasUsadasNoMomento.clear();
+
+        for(int x = 0; x < listaPosicaoLetrasEncontradasPalavra1.length; x++){
+            listaPosicaoLetrasEncontradasPalavra1[x] = "";
+        }
+        for(int x = 0; x < listaPosicaoLetrasEncontradasPalavra2.length; x++){
+            listaPosicaoLetrasEncontradasPalavra1[x] = "";
+        }
+        for(int x = 0; x < listaPosicaoLetrasEncontradasPalavra3.length; x++){
+            listaPosicaoLetrasEncontradasPalavra1[x] = "";
+        }
+
+        valorReaisSorteado = 0;
+        valorReaisAcumuladoJogadorCorrente = 0;
+        jogadorErrou = false; //Usada para passar o jogo para o proximo jogador se este errar a leta, passar ou perder tudo
+        qtdErrosJogador1 = 0;
+        respostaATiva = false;
+        jogador1EliminadoRodada = false;
+        jogador2EliminadoRodada = false;
+        jogador3EliminadoRodada = false;
+        
+        try {
+            listaPalavrasUsadasNoMomento = guardaPalavrasSorteadas();
+        } catch (IOException ex) {
+            Logger.getLogger(TelaJogadores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.listaPosicaoLetrasEncontradasPalavra1 = new String[(listaPalavrasUsadasNoMomento.get(1).toString()).length()]; //Pega tamanho da palavra sorteada;
+        this.listaPosicaoLetrasEncontradasPalavra2 = new String[(listaPalavrasUsadasNoMomento.get(2).toString()).length()]; //Pega tamanho da palavra sorteada;
+        this.listaPosicaoLetrasEncontradasPalavra3 = new String[(listaPalavrasUsadasNoMomento.get(3).toString()).length()]; //Pega tamanho da palavra sorteada;
+
+        escondeTecladoLetras();
+        roleta.setEnabled(true);
+        btRodar.setEnabled(true);
+        
+         if(qtdJogadores == 1){
+            saldoJogador1.setText(String.valueOf(valorAcumuladoJogador1));
+        }
+        else if(qtdJogadores == 2){
+            saldoJogador1.setText(String.valueOf(valorAcumuladoJogador1));
+            saldoJogador2.setText(String.valueOf(valorAcumuladoJogador2));
+        }
+        else if(qtdJogadores == 3){
+            saldoJogador1.setText(String.valueOf(valorAcumuladoJogador1));
+            saldoJogador2.setText(String.valueOf(valorAcumuladoJogador2));
+            saldoJogador3.setText(String.valueOf(valorAcumuladoJogador3));
+        }
+
+        
+        btAvancar.setVisible(false);
+        
+    }//GEN-LAST:event_btAvancarActionPerformed
 
     /**
      * @param args the command line arguments
