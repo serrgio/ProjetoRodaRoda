@@ -15,7 +15,7 @@ public class Metodos {
     
      public void audioInicial() { 
         
-        for(int i = 0; i < 2; i ++){
+//        for(int i = 0; i < 1; i ++){
                        
                 AudioPlayer MGP = AudioPlayer.player;  
                 AudioStream BGM = null;  
@@ -28,12 +28,84 @@ public class Metodos {
 
                 MGP.start(BGM);
                 
-                try {
-                    Thread.sleep( 10000 ); // coloca a "thread" para "dormir"
-                } catch (InterruptedException e) {
-                    e.printStackTrace( System.err );
-                }
-        }
+//                try {
+//                    Thread.sleep( 10000 ); // coloca a "thread" para "dormir"
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace( System.err );
+//                }
+//        }
+        
+    }
+     
+    public void audioLetraErrada() { 
+        
+//        for(int i = 0; i < 2; i ++){
+                       
+                AudioPlayer MGP = AudioPlayer.player;  
+                AudioStream BGM = null;  
+                try {  
+                    BGM = new AudioStream(new FileInputStream("LetraErrada.wav"));  
+                } catch(IOException error) {
+                    error.printStackTrace();
+                    System.out.println("Error!!!");  
+                }  
+
+                MGP.start(BGM);
+                
+//                try {
+//                    Thread.sleep( 10000 ); // coloca a "thread" para "dormir"
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace( System.err );
+//                }
+//        }
+        
+    }
+    
+    public void audioRoleta() { 
+        
+//        for(int i = 0; i < 2; i ++){
+                       
+                AudioPlayer MGP = AudioPlayer.player;  
+                AudioStream BGM = null;  
+                try {  
+                    BGM = new AudioStream(new FileInputStream("Roleta.wav"));  
+                } catch(IOException error) {
+                    error.printStackTrace();
+                    System.out.println("Error!!!");  
+                }  
+
+                MGP.start(BGM);
+                
+//                try {
+//                    Thread.sleep( 10000 ); // coloca a "thread" para "dormir"
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace( System.err );
+//                }
+//        }
+        
+    }
+    
+    public void audioLetraCorreta() { 
+        
+//        for(int i = 0; i < 2; i ++){
+                       
+                AudioPlayer MGP = AudioPlayer.player;  
+                AudioStream BGM = null;  
+                try {  
+                    BGM = new AudioStream(new FileInputStream("LetraCorreta.wav"));  
+                } catch(IOException error) {
+                    error.printStackTrace();
+                    System.out.println("Error!!!");  
+                }  
+
+                MGP.start(BGM);
+                
+//                try {
+//                    Thread.sleep( 10000 ); // coloca a "thread" para "dormir"
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace( System.err );
+//                }
+//        }
         
     }
      

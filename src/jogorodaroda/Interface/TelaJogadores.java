@@ -166,11 +166,11 @@ public class TelaJogadores extends javax.swing.JFrame {
     public int rodarRoleta() throws InterruptedException {
 
         Random random = new Random();
-        int aleatorio = random.nextInt(3) + 2;
+//        int aleatorio = random.nextInt(3) + 2;
         int sorteRoleta = random.nextInt(20) + 1;
         
-        for (int x = 1; x <= aleatorio; x++) {
-            if(x != aleatorio ){
+        for (int x = 1; x <= 4; x++) {
+            if(x != 4 ){
                 for (int i = 20; i >= 1; i--) {
 
                     ImageIcon img = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Roleta/" + i + ".png"));
@@ -616,6 +616,9 @@ public class TelaJogadores extends javax.swing.JFrame {
         valorReaisAcumuladoJogadorCorrente = 0;
         boolean encontrouLetraPalavraAnterior1 = true;
         boolean encontrouLetraPalavraAnterior2 = true;
+        boolean encontrouLetra = true;
+        
+        Metodos metodos = new Metodos();
         
         
         switch(qtdPalavras){
@@ -629,15 +632,22 @@ public class TelaJogadores extends javax.swing.JFrame {
                        if(valorReaisSorteado > 0){
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
                        }
+                       
+                       if(encontrouLetra == true){
+                         metodos.audioLetraCorreta();
+                         encontrouLetra = false;
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";        
                     }
+                    
                 }
 
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
                     jogadorErrou = true;
                     qtdErrosJogador1 = qtdErrosJogador1 + 1;
+                    metodos.audioLetraErrada();
                 } 
                 
                 if(respostaATiva == true){//Trata resposta do jogador
@@ -718,10 +728,16 @@ public class TelaJogadores extends javax.swing.JFrame {
                        if(valorReaisSorteado > 0){
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
                        }
+                       if(encontrouLetra == true){
+                            metodos.audioLetraCorreta();
+                            encontrouLetra = false;
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
+                    
+                    
                 }
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
 //                    jogadorErrou = true;
@@ -737,15 +753,22 @@ public class TelaJogadores extends javax.swing.JFrame {
                        if(valorReaisSorteado > 0){
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
                        }
+                       if(encontrouLetra == true){
+                         metodos.audioLetraCorreta();
+                         encontrouLetra = false;
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra2[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra2[i] = " ";
                     }
+                    
                 }
                 
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida) && encontrouLetraPalavraAnterior1 == false){//Se jogador errar pula para proximo jogador
                     jogadorErrou = true;
-                    qtdErrosJogador1 = qtdErrosJogador1 + 1;
+                    qtdErrosJogador1 = qtdErrosJogador1 + 1;                 
+                    metodos.audioLetraErrada();
+
                 }
                 
                 if(respostaATiva == true){//Trata resposta do jogador
@@ -830,6 +853,10 @@ public class TelaJogadores extends javax.swing.JFrame {
             break;
                 
             case 3:
+                boolean validaSeEncontrou1 = false;
+                boolean validaSeEncontrou2 = false;
+                boolean validaSeErrou1 = false;
+                boolean validaSeErrou2 = false;
                 System.err.println(palavra1);
                 for(int i = 0; i < palavra1.length(); i ++){
                     achouLetra = palavra1.substring(i, i + 1);
@@ -839,10 +866,15 @@ public class TelaJogadores extends javax.swing.JFrame {
                        if(valorReaisSorteado > 0){
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
                        }
+                       if(encontrouLetra == true){
+                            metodos.audioLetraCorreta();
+                            encontrouLetra = false;
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
+                    
                 }
                 
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
@@ -858,10 +890,15 @@ public class TelaJogadores extends javax.swing.JFrame {
                        if(valorReaisSorteado > 0){
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
                        }
+                       if(encontrouLetra == true){
+                            metodos.audioLetraCorreta();
+                            encontrouLetra = false;
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra2[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra2[i] = " ";
                     }
+                    
                 }
                 
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
@@ -877,15 +914,20 @@ public class TelaJogadores extends javax.swing.JFrame {
                        if(valorReaisSorteado > 0){
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
                        }
+                       if(encontrouLetra == true && encontrouLetra == true){
+                         metodos.audioLetraCorreta();
+                       }
                     }
                     else if(listaPosicaoLetrasEncontradasPalavra3[i] == " "){
                         listaPosicaoLetrasEncontradasPalavra3[i] = " ";
                     }
+                    
                 }
                 
                 if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(letraEscolhida) && encontrouLetraPalavraAnterior1 == false && encontrouLetraPalavraAnterior2 == false){//Se jogador errar pula para proximo jogador
-                jogadorErrou = true;
-                qtdErrosJogador1 = qtdErrosJogador1 + 1;
+                    jogadorErrou = true;
+                    qtdErrosJogador1 = qtdErrosJogador1 + 1;
+                        metodos.audioLetraErrada();
                 }
                 
                 
@@ -994,34 +1036,101 @@ public class TelaJogadores extends javax.swing.JFrame {
                     case 1:
                         if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null)){
                             JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                            roleta.setEnabled(false);
                             escondeTecladoLetras();
-                            btRodar.setEnabled(false);
-                            btResponder.setEnabled(false);
+                            btRodar.setVisible(false);
+                            btResponder.setVisible(false);
                             btAvancar.setVisible(true);
 
                         }
+                        if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
+                            
+                            
+                            if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                            
+                        }
+                            
                     break;
 
                     case 2:
                         if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null)){
                             JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                            roleta.setEnabled(false);
                             escondeTecladoLetras();
                             btRodar.setEnabled(false);
-                            btResponder.setEnabled(false);
+                            btResponder.setVisible(false);
                             btAvancar.setVisible(true);
+                        }
+                        if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
+                            
+                            
+                            if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                            
                         }
                     break;
 
                     case 3:
                         if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(null)){
                             JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                            roleta.setEnabled(false);
                             escondeTecladoLetras();
                             btRodar.setEnabled(false);
-                            btResponder.setEnabled(false);
+                            btResponder.setVisible(false);
                             btAvancar.setVisible(true);
+                        }
+                        if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
+                            
+                            
+                            if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                            
                         }
                     break;    
                 }
@@ -1032,34 +1141,100 @@ public class TelaJogadores extends javax.swing.JFrame {
                 case 1:
                     if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null)){
                         JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                        roleta.setEnabled(false);
                         escondeTecladoLetras();
                         btRodar.setEnabled(false);
-                        btResponder.setEnabled(false);
+                        btResponder.setVisible(false);
                         btAvancar.setVisible(true);
                     }
+                    if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
+                            
+                            
+                            if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                            
+                        }
                 break;
                 
                 case 2:
                     if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null)){
                         JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                        roleta.setEnabled(false);
                         escondeTecladoLetras();
                         btRodar.setEnabled(false);
-                        btResponder.setEnabled(false);
+                        btResponder.setVisible(false);
                         btAvancar.setVisible(true);
                     }
+                    if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
+                            
+                            
+                            if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                            
+                        }
                 break;
                     
                 case 3:
                     if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(null)){
                         JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                        roleta.setEnabled(false);
                         escondeTecladoLetras();
                         btRodar.setEnabled(false);
-                        btResponder.setEnabled(false);
+                        btResponder.setVisible(false);
                         btAvancar.setVisible(true);
                     }
+                    if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
+                            
+                            
+                            if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
+                                                                                "Dilma: " + valorAcumuladoJogador2 + "\n" +
+                                                                                "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
+                                                                                "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                            
+                        }
                 break;    
             }
         }
@@ -2174,7 +2349,7 @@ public class TelaJogadores extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btAvancar);
-        btAvancar.setBounds(790, 290, 130, 40);
+        btAvancar.setBounds(720, 280, 250, 80);
 
         imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Tela3Jogador.png"))); // NOI18N
         getContentPane().add(imagemFundo);
@@ -2246,6 +2421,8 @@ public class TelaJogadores extends javax.swing.JFrame {
 
     private void btRodarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRodarActionPerformed
         int valorSorteado = 0;
+        Metodos metodos = new Metodos();
+        metodos.audioRoleta();
         try {
             valorSorteado = rodarRoleta();
         } catch (InterruptedException ex) {
@@ -2358,6 +2535,8 @@ public class TelaJogadores extends javax.swing.JFrame {
     }//GEN-LAST:event_btRodarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        Metodos metodos = new Metodos();
+        metodos.audioInicial();
         TelaInicial telaInicial = new TelaInicial();
 
         telaInicial.dispose();
@@ -2649,7 +2828,8 @@ public class TelaJogadores extends javax.swing.JFrame {
 
         escondeTecladoLetras();
         roleta.setEnabled(true);
-        btRodar.setEnabled(true);
+        btRodar.setVisible(true);
+        btResponder.setVisible(true);
         
          if(qtdJogadores == 1){
             saldoJogador1.setText(String.valueOf(valorAcumuladoJogador1));
