@@ -2,21 +2,22 @@ package jogorodaroda.Classe;
 
 import jogorodaroda.Interface.TelaInicial;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
+public class Main {
+    public static void main(String args[]) throws IOException {
 
-public class Main{
+      TelaInicial telaInicial = new TelaInicial();
 
-    public static void main(String args[]){
-        TelaInicial telaInicial = new TelaInicial();
-
-        telaInicial.dispose();
-        telaInicial.setUndecorated(true);
-        telaInicial.setVisible(true);
-        telaInicial.setLocationRelativeTo(null);
-        
-        ClasseTelaInicial classeTelaIicial = new ClasseTelaInicial();
-        classeTelaIicial.audioInicial();
-        
-        
+      telaInicial.dispose();
+      telaInicial.setUndecorated(true);
+      telaInicial.setVisible(true);
+      telaInicial.setLocationRelativeTo(null);
+      
+      Metodos metodos = new Metodos();
+      metodos.audioInicial();
+            
     }
 }
