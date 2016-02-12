@@ -1,41 +1,40 @@
 package jogorodaroda.Interface;
 
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.awt.Color;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.runtime.ScriptRuntime;
 import jogorodaroda.Classe.Metodos;
 
 /**
+ * Classe responsável por iniciar a "Tela dos jogadores"
  *
- * @author GAOliveira
+ * @author Geovane
+ * @author José Sérgio
+ * @version 1.0
+ *
  */
-public class TelaJogadores extends javax.swing.JFrame {
+public final class TelaJogadores extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaPrincipal
+     * Método responsável por criar a tela principal do jogo
      *
-     * @param jogadores
-     * @param palavras
-     * @param etapas
-     * @param parametors
+     * @author Geovane
+     * @author José Sérgio
+     * @version 1.0
+     *
      */
     ArrayList<String> listaPalavras = new ArrayList();
     ArrayList<String> listapalavrasSorteadas = new ArrayList();
     ArrayList<String> listaPalavrasUsadasNoMomento = new ArrayList();
-    String [] listaPosicaoLetrasEncontradasPalavra1;
-    String [] listaPosicaoLetrasEncontradasPalavra2;
-    String [] listaPosicaoLetrasEncontradasPalavra3;
+    String[] listaPosicaoLetrasEncontradasPalavra1;
+    String[] listaPosicaoLetrasEncontradasPalavra2;
+    String[] listaPosicaoLetrasEncontradasPalavra3;
     int valorReaisSorteado = 0;
     int jogadorCorrente = 1; //Jogador que está com a roleta
     int valorReaisAcumuladoJogadorCorrente = 0;
@@ -48,11 +47,11 @@ public class TelaJogadores extends javax.swing.JFrame {
     boolean jogador2EliminadoRodada = false;
     boolean jogador3EliminadoRodada = false;
     int etapaAtual = 1;
-    
+
     int valorAcumuladoJogador1 = 0; //Variável usada para armazenar o valor acumulado durante todas as etapas
     int valorAcumuladoJogador2 = 0; //Variável usada para armazenar o valor acumulado durante todas as etapas
     int valorAcumuladoJogador3 = 0; //Variável usada para armazenar o valor acumulado durante todas as etapas
-    
+
     public void qtdPalavras(int qtdpalavra) {
         switch (qtdpalavra) {
 
@@ -128,7 +127,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         btAvancar.setVisible(false);
 
         escondeTecladoLetras();
-        etapa.setText( etapaAtual + " / " + qtdetapas);
+        etapa.setText(etapaAtual + " / " + qtdetapas);
 
         switch (jogadores) {
             case 1:
@@ -154,9 +153,9 @@ public class TelaJogadores extends javax.swing.JFrame {
         }
 
         listaPalavrasUsadasNoMomento = guardaPalavrasSorteadas();
-                this.listaPosicaoLetrasEncontradasPalavra1 = new String[(listaPalavrasUsadasNoMomento.get(1).toString()).length()]; //Pega tamanho da palavra sorteada;
-                this.listaPosicaoLetrasEncontradasPalavra2 = new String[(listaPalavrasUsadasNoMomento.get(2).toString()).length()]; //Pega tamanho da palavra sorteada;
-                this.listaPosicaoLetrasEncontradasPalavra3 = new String[(listaPalavrasUsadasNoMomento.get(3).toString()).length()]; //Pega tamanho da palavra sorteada;
+        this.listaPosicaoLetrasEncontradasPalavra1 = new String[(listaPalavrasUsadasNoMomento.get(1)).length()]; //Pega tamanho da palavra sorteada;
+        this.listaPosicaoLetrasEncontradasPalavra2 = new String[(listaPalavrasUsadasNoMomento.get(2)).length()]; //Pega tamanho da palavra sorteada;
+        this.listaPosicaoLetrasEncontradasPalavra3 = new String[(listaPalavrasUsadasNoMomento.get(3)).length()]; //Pega tamanho da palavra sorteada;
 
     }
 
@@ -168,9 +167,9 @@ public class TelaJogadores extends javax.swing.JFrame {
         Random random = new Random();
 //        int aleatorio = random.nextInt(3) + 2;
         int sorteRoleta = random.nextInt(20) + 1;
-        
+
         for (int x = 1; x <= 4; x++) {
-            if(x != 4 ){
+            if (x != 4) {
                 for (int i = 20; i >= 1; i--) {
 
                     ImageIcon img = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Roleta/" + i + ".png"));
@@ -182,9 +181,8 @@ public class TelaJogadores extends javax.swing.JFrame {
                     new Thread().sleep(x * 50);
 
                 }
-            }
-            else{
-                
+            } else {
+
                 for (int i = 20; i >= sorteRoleta; i--) {
 
                     ImageIcon img = new ImageIcon(getClass().getResource("/jogorodaroda/Imagens/Roleta/" + i + ".png"));
@@ -196,7 +194,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                     new Thread().sleep(x * 50);
 
                 }
-                
+
             }
         }
 
@@ -208,404 +206,399 @@ public class TelaJogadores extends javax.swing.JFrame {
         int tamanhoPalavra1;
         int tamanhoPalavra2;
         int tamanhoPalavra3;
-        
+
         listapalavrasSorteadas = m.palavrasSorteadas(listaPalavras);
         dica.setText(listapalavrasSorteadas.get(0));
-        for(Object palavrasorteadas : listapalavrasSorteadas) {
+        for (Object palavrasorteadas : listapalavrasSorteadas) {
             listaPalavras.add((String) palavrasorteadas);
         }
-        
-        
-        switch(qtdPalavras){
+
+        switch (qtdPalavras) {
             case 1:
-            tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
-                 if(tamanhoPalavra1 >= 1){
+                tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
+                if (tamanhoPalavra1 >= 1) {
                     p1l1.setOpaque(true); // Deixa a label opaca.
                     p1l1.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 2){
+                if (tamanhoPalavra1 >= 2) {
                     p1l2.setOpaque(true); // Deixa a label opaca.
                     p1l2.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 3){
+                if (tamanhoPalavra1 >= 3) {
                     p1l3.setOpaque(true); // Deixa a label opaca.
                     p1l3.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 4){
+                if (tamanhoPalavra1 >= 4) {
                     p1l4.setOpaque(true); // Deixa a label opaca.
                     p1l4.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 5){
+                if (tamanhoPalavra1 >= 5) {
                     p1l5.setOpaque(true); // Deixa a label opaca.
                     p1l5.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 6){
+                if (tamanhoPalavra1 >= 6) {
                     p1l6.setOpaque(true); // Deixa a label opaca.
                     p1l6.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 7){
+                if (tamanhoPalavra1 >= 7) {
                     p1l7.setOpaque(true); // Deixa a label opaca.
                     p1l7.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 8){
+                if (tamanhoPalavra1 >= 8) {
                     p1l8.setOpaque(true); // Deixa a label opaca.
                     p1l8.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 9){
+                if (tamanhoPalavra1 >= 9) {
                     p1l9.setOpaque(true); // Deixa a label opaca.
                     p1l9.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 10){
+                if (tamanhoPalavra1 >= 10) {
                     p1l10.setOpaque(true); // Deixa a label opaca.
                     p1l10.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 11){
+                if (tamanhoPalavra1 >= 11) {
                     p1l11.setOpaque(true); // Deixa a label opaca.
                     p1l11.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 12){
+                if (tamanhoPalavra1 >= 12) {
                     p1l12.setOpaque(true); // Deixa a label opaca.
                     p1l12.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 13){
+                if (tamanhoPalavra1 >= 13) {
                     p1l13.setOpaque(true); // Deixa a label opaca.
                     p1l13.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 14){
+                if (tamanhoPalavra1 >= 14) {
                     p1l14.setOpaque(true); // Deixa a label opaca.
                     p1l14.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 15){
+                if (tamanhoPalavra1 >= 15) {
                     p1l15.setOpaque(true); // Deixa a label opaca.
                     p1l15.setBackground(Color.white); // Muda a cor de fundo.
                 }
-            break;
-                
+                break;
+
             case 2:
-             tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
-             tamanhoPalavra2 = (listapalavrasSorteadas.get(2)).length();
+                tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
+                tamanhoPalavra2 = (listapalavrasSorteadas.get(2)).length();
 
-                if(tamanhoPalavra1 >= 1){
+                if (tamanhoPalavra1 >= 1) {
                     p1l1.setOpaque(true); // Deixa a label opaca.
                     p1l1.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 2){
+                if (tamanhoPalavra1 >= 2) {
                     p1l2.setOpaque(true); // Deixa a label opaca.
                     p1l2.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 3){
+                if (tamanhoPalavra1 >= 3) {
                     p1l3.setOpaque(true); // Deixa a label opaca.
                     p1l3.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 4){
+                if (tamanhoPalavra1 >= 4) {
                     p1l4.setOpaque(true); // Deixa a label opaca.
                     p1l4.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 5){
+                if (tamanhoPalavra1 >= 5) {
                     p1l5.setOpaque(true); // Deixa a label opaca.
                     p1l5.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 6){
+                if (tamanhoPalavra1 >= 6) {
                     p1l6.setOpaque(true); // Deixa a label opaca.
                     p1l6.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 7){
+                if (tamanhoPalavra1 >= 7) {
                     p1l7.setOpaque(true); // Deixa a label opaca.
                     p1l7.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 8){
+                if (tamanhoPalavra1 >= 8) {
                     p1l8.setOpaque(true); // Deixa a label opaca.
                     p1l8.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 9){
+                if (tamanhoPalavra1 >= 9) {
                     p1l9.setOpaque(true); // Deixa a label opaca.
                     p1l9.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 10){
+                if (tamanhoPalavra1 >= 10) {
                     p1l10.setOpaque(true); // Deixa a label opaca.
                     p1l10.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 11){
+                if (tamanhoPalavra1 >= 11) {
                     p1l11.setOpaque(true); // Deixa a label opaca.
                     p1l11.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 12){
+                if (tamanhoPalavra1 >= 12) {
                     p1l12.setOpaque(true); // Deixa a label opaca.
                     p1l12.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 13){
+                if (tamanhoPalavra1 >= 13) {
                     p1l13.setOpaque(true); // Deixa a label opaca.
                     p1l13.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 14){
+                if (tamanhoPalavra1 >= 14) {
                     p1l14.setOpaque(true); // Deixa a label opaca.
                     p1l14.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 15){
+                if (tamanhoPalavra1 >= 15) {
                     p1l15.setOpaque(true); // Deixa a label opaca.
                     p1l15.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                
-                
-                if(tamanhoPalavra2 >= 1){
+
+                if (tamanhoPalavra2 >= 1) {
                     p2l1.setOpaque(true); // Deixa a label opaca.
                     p2l1.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 2){
+                if (tamanhoPalavra2 >= 2) {
                     p2l2.setOpaque(true); // Deixa a label opaca.
                     p2l2.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 3){
+                if (tamanhoPalavra2 >= 3) {
                     p2l3.setOpaque(true); // Deixa a label opaca.
                     p2l3.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 4){
+                if (tamanhoPalavra2 >= 4) {
                     p2l4.setOpaque(true); // Deixa a label opaca.
                     p2l4.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 5){
+                if (tamanhoPalavra2 >= 5) {
                     p2l5.setOpaque(true); // Deixa a label opaca.
                     p2l5.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 6){
+                if (tamanhoPalavra2 >= 6) {
                     p2l6.setOpaque(true); // Deixa a label opaca.
                     p2l6.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 7){
+                if (tamanhoPalavra2 >= 7) {
                     p2l7.setOpaque(true); // Deixa a label opaca.
                     p2l7.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 8){
+                if (tamanhoPalavra2 >= 8) {
                     p2l8.setOpaque(true); // Deixa a label opaca.
                     p2l8.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 9){
+                if (tamanhoPalavra2 >= 9) {
                     p2l9.setOpaque(true); // Deixa a label opaca.
                     p2l9.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 10){
+                if (tamanhoPalavra2 >= 10) {
                     p2l10.setOpaque(true); // Deixa a label opaca.
                     p2l10.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 11){
+                if (tamanhoPalavra2 >= 11) {
                     p2l11.setOpaque(true); // Deixa a label opaca.
                     p2l11.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 12){
+                if (tamanhoPalavra2 >= 12) {
                     p2l12.setOpaque(true); // Deixa a label opaca.
                     p2l12.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 13){
+                if (tamanhoPalavra2 >= 13) {
                     p2l13.setOpaque(true); // Deixa a label opaca.
                     p2l13.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 14){
+                if (tamanhoPalavra2 >= 14) {
                     p2l14.setOpaque(true); // Deixa a label opaca.
                     p2l14.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 15){
+                if (tamanhoPalavra2 >= 15) {
                     p2l15.setOpaque(true); // Deixa a label opaca.
                     p2l15.setBackground(Color.white); // Muda a cor de fundo.
                 }
-            break;
-                
+                break;
+
             case 3:
-            tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
-            tamanhoPalavra2 = (listapalavrasSorteadas.get(2)).length();
-            tamanhoPalavra3 = (listapalavrasSorteadas.get(3)).length();
+                tamanhoPalavra1 = (listapalavrasSorteadas.get(1)).length();
+                tamanhoPalavra2 = (listapalavrasSorteadas.get(2)).length();
+                tamanhoPalavra3 = (listapalavrasSorteadas.get(3)).length();
 
-                if(tamanhoPalavra1 >= 1){
+                if (tamanhoPalavra1 >= 1) {
                     p1l1.setOpaque(true); // Deixa a label opaca.
                     p1l1.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 2){
+                if (tamanhoPalavra1 >= 2) {
                     p1l2.setOpaque(true); // Deixa a label opaca.
                     p1l2.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 3){
+                if (tamanhoPalavra1 >= 3) {
                     p1l3.setOpaque(true); // Deixa a label opaca.
                     p1l3.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 4){
+                if (tamanhoPalavra1 >= 4) {
                     p1l4.setOpaque(true); // Deixa a label opaca.
                     p1l4.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 5){
+                if (tamanhoPalavra1 >= 5) {
                     p1l5.setOpaque(true); // Deixa a label opaca.
                     p1l5.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 6){
+                if (tamanhoPalavra1 >= 6) {
                     p1l6.setOpaque(true); // Deixa a label opaca.
                     p1l6.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 7){
+                if (tamanhoPalavra1 >= 7) {
                     p1l7.setOpaque(true); // Deixa a label opaca.
                     p1l7.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 8){
+                if (tamanhoPalavra1 >= 8) {
                     p1l8.setOpaque(true); // Deixa a label opaca.
                     p1l8.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 9){
+                if (tamanhoPalavra1 >= 9) {
                     p1l9.setOpaque(true); // Deixa a label opaca.
                     p1l9.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 10){
+                if (tamanhoPalavra1 >= 10) {
                     p1l10.setOpaque(true); // Deixa a label opaca.
                     p1l10.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 11){
+                if (tamanhoPalavra1 >= 11) {
                     p1l11.setOpaque(true); // Deixa a label opaca.
                     p1l11.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 12){
+                if (tamanhoPalavra1 >= 12) {
                     p1l12.setOpaque(true); // Deixa a label opaca.
                     p1l12.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 13){
+                if (tamanhoPalavra1 >= 13) {
                     p1l13.setOpaque(true); // Deixa a label opaca.
                     p1l13.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 14){
+                if (tamanhoPalavra1 >= 14) {
                     p1l14.setOpaque(true); // Deixa a label opaca.
                     p1l14.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra1 >= 15){
+                if (tamanhoPalavra1 >= 15) {
                     p1l15.setOpaque(true); // Deixa a label opaca.
                     p1l15.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                
-                
-                if(tamanhoPalavra2 >= 1){
+
+                if (tamanhoPalavra2 >= 1) {
                     p2l1.setOpaque(true); // Deixa a label opaca.
                     p2l1.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 2){
+                if (tamanhoPalavra2 >= 2) {
                     p2l2.setOpaque(true); // Deixa a label opaca.
                     p2l2.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 3){
+                if (tamanhoPalavra2 >= 3) {
                     p2l3.setOpaque(true); // Deixa a label opaca.
                     p2l3.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 4){
+                if (tamanhoPalavra2 >= 4) {
                     p2l4.setOpaque(true); // Deixa a label opaca.
                     p2l4.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 5){
+                if (tamanhoPalavra2 >= 5) {
                     p2l5.setOpaque(true); // Deixa a label opaca.
                     p2l5.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 6){
+                if (tamanhoPalavra2 >= 6) {
                     p2l6.setOpaque(true); // Deixa a label opaca.
                     p2l6.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 7){
+                if (tamanhoPalavra2 >= 7) {
                     p2l7.setOpaque(true); // Deixa a label opaca.
                     p2l7.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 8){
+                if (tamanhoPalavra2 >= 8) {
                     p2l8.setOpaque(true); // Deixa a label opaca.
                     p2l8.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 9){
+                if (tamanhoPalavra2 >= 9) {
                     p2l9.setOpaque(true); // Deixa a label opaca.
                     p2l9.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 10){
+                if (tamanhoPalavra2 >= 10) {
                     p2l10.setOpaque(true); // Deixa a label opaca.
                     p2l10.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 11){
+                if (tamanhoPalavra2 >= 11) {
                     p2l11.setOpaque(true); // Deixa a label opaca.
                     p2l11.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 12){
+                if (tamanhoPalavra2 >= 12) {
                     p2l12.setOpaque(true); // Deixa a label opaca.
                     p2l12.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 13){
+                if (tamanhoPalavra2 >= 13) {
                     p2l13.setOpaque(true); // Deixa a label opaca.
                     p2l13.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 14){
+                if (tamanhoPalavra2 >= 14) {
                     p2l14.setOpaque(true); // Deixa a label opaca.
                     p2l14.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra2 >= 15){
+                if (tamanhoPalavra2 >= 15) {
                     p2l15.setOpaque(true); // Deixa a label opaca.
                     p2l15.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                
-                
-                
-                if(tamanhoPalavra3 >= 1){
+
+                if (tamanhoPalavra3 >= 1) {
                     p3l1.setOpaque(true); // Deixa a label opaca.
                     p3l1.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 2){
+                if (tamanhoPalavra3 >= 2) {
                     p3l2.setOpaque(true); // Deixa a label opaca.
                     p3l2.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 3){
+                if (tamanhoPalavra3 >= 3) {
                     p3l3.setOpaque(true); // Deixa a label opaca.
                     p3l3.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 4){
+                if (tamanhoPalavra3 >= 4) {
                     p3l4.setOpaque(true); // Deixa a label opaca.
                     p3l4.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 5){
+                if (tamanhoPalavra3 >= 5) {
                     p3l5.setOpaque(true); // Deixa a label opaca.
                     p3l5.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 6){
+                if (tamanhoPalavra3 >= 6) {
                     p3l6.setOpaque(true); // Deixa a label opaca.
                     p3l6.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 7){
+                if (tamanhoPalavra3 >= 7) {
                     p3l7.setOpaque(true); // Deixa a label opaca.
                     p3l7.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 8){
+                if (tamanhoPalavra3 >= 8) {
                     p3l8.setOpaque(true); // Deixa a label opaca.
                     p3l8.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 9){
+                if (tamanhoPalavra3 >= 9) {
                     p3l9.setOpaque(true); // Deixa a label opaca.
                     p3l9.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 10){
+                if (tamanhoPalavra3 >= 10) {
                     p3l10.setOpaque(true); // Deixa a label opaca.
                     p3l10.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 11){
+                if (tamanhoPalavra3 >= 11) {
                     p3l11.setOpaque(true); // Deixa a label opaca.
                     p3l11.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 12){
+                if (tamanhoPalavra3 >= 12) {
                     p3l12.setOpaque(true); // Deixa a label opaca.
                     p3l12.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 13){
+                if (tamanhoPalavra3 >= 13) {
                     p3l13.setOpaque(true); // Deixa a label opaca.
                     p3l13.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 14){
+                if (tamanhoPalavra3 >= 14) {
                     p3l14.setOpaque(true); // Deixa a label opaca.
                     p3l14.setBackground(Color.white); // Muda a cor de fundo.
                 }
-                if(tamanhoPalavra3 >= 15){
+                if (tamanhoPalavra3 >= 15) {
                     p3l15.setOpaque(true); // Deixa a label opaca.
                     p3l15.setBackground(Color.white); // Muda a cor de fundo.
                 }
-            break;
+                break;
         }
 
         return listapalavrasSorteadas;
     }
 
-    public void letraSelecionada(String letraEscolhida, ArrayList palavrasEtapa, int qtdPalavras){
+    public void letraSelecionada(String letraEscolhida, ArrayList palavrasEtapa, int qtdPalavras) {
         String palavra1;
         String palavra2;
         String palavra3;
@@ -617,51 +610,48 @@ public class TelaJogadores extends javax.swing.JFrame {
         boolean encontrouLetraPalavraAnterior1 = true;
         boolean encontrouLetraPalavraAnterior2 = true;
         boolean encontrouLetra = true;
-        
+
         Metodos metodos = new Metodos();
-        
-        
-        switch(qtdPalavras){
-            case 1:            
+
+        switch (qtdPalavras) {
+            case 1:
                 System.err.println(palavra1);
-                for(int i = 0; i < palavra1.length(); i ++){
+                for (int i = 0; i < palavra1.length(); i++) {
                     achouLetra = palavra1.substring(i, i + 1);
-                    
-                    if(achouLetra.equals(letraEscolhida)){
-                       listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
-                       if(valorReaisSorteado > 0){
+
+                    if (achouLetra.equals(letraEscolhida)) {
+                        listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
+                        if (valorReaisSorteado > 0) {
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
-                       }
-                       
-                       if(encontrouLetra == true){
-                         metodos.audioLetraCorreta();
-                         encontrouLetra = false;
-                       }
+                        }
+
+                        if (encontrouLetra == true) {
+                            metodos.audioLetraCorreta();
+                            encontrouLetra = false;
+                        }
+                    } else if (listaPosicaoLetrasEncontradasPalavra1[i] == " ") {
+                        listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
-                    else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
-                        listaPosicaoLetrasEncontradasPalavra1[i] = " ";        
-                    }
-                    
+
                 }
 
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)) {//Se jogador errar pula para proximo jogador
                     jogadorErrou = true;
                     qtdErrosJogador1 = qtdErrosJogador1 + 1;
                     metodos.audioLetraErrada();
-                    
-                } 
-                
-                if(respostaATiva == true){//Trata resposta do jogador
-                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){
-                        if(qtdJogadores == 1){
+
+                }
+
+                if (respostaATiva == true) {//Trata resposta do jogador
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)) {
+                        if (qtdJogadores == 1) {
                             JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
                             saldoJogador1.setOpaque(true);
                             saldoJogador1.setBackground(Color.red);
                             saldoJogador1.repaint();
                             jogador1EliminadoRodada = true;
                             escondeTecladoLetras();
-                        }
-                        else{
+                        } else {
 //                            if(jogadorCorrente == 1){
 //                                saldoJogador1.setOpaque(true);
 //                                saldoJogador1.setBackground(Color.red);
@@ -669,34 +659,32 @@ public class TelaJogadores extends javax.swing.JFrame {
 //                                jogador1EliminadoRodada = true;
 //                                escondeTecladoLetras();
 //                            }
-    //                        else if(jogadorCorrente == 2){
-    //                            saldoJogador2.setOpaque(true);
-    //                            saldoJogador2.setBackground(Color.red);
-    //                            saldoJogador2.repaint();  
-    //                            jogador2EliminadoRodada = true;
-    //                        }
-    //                        else if(jogadorCorrente == 3){
-    //                            saldoJogador3.setOpaque(true);
-    //                            saldoJogador3.setBackground(Color.red);
-    //                            saldoJogador3.repaint();
-    //                            jogador3EliminadoRodada = true;
-    //                        }
+                            //                        else if(jogadorCorrente == 2){
+                            //                            saldoJogador2.setOpaque(true);
+                            //                            saldoJogador2.setBackground(Color.red);
+                            //                            saldoJogador2.repaint();  
+                            //                            jogador2EliminadoRodada = true;
+                            //                        }
+                            //                        else if(jogadorCorrente == 3){
+                            //                            saldoJogador3.setOpaque(true);
+                            //                            saldoJogador3.setBackground(Color.red);
+                            //                            saldoJogador3.repaint();
+                            //                            jogador3EliminadoRodada = true;
+                            //                        }
 //                        
-                        escondeTecladoLetras();
-                        roleta.setEnabled(true);
-                        respostaATiva = false;
-                        btResponder.setEnabled(true);
+                            escondeTecladoLetras();
+                            roleta.setEnabled(true);
+                            respostaATiva = false;
+                            btResponder.setEnabled(true);
                         }
-                    }
-                    else{
+                    } else {
                         btRodar.setEnabled(false);
                         mostraTecladoLetras();
                     }
-                    
+
                 }
 
-                    
-                try{
+                try {
                     p1l1.setText(listaPosicaoLetrasEncontradasPalavra1[0]);
                     p1l2.setText(listaPosicaoLetrasEncontradasPalavra1[1]);
                     p1l3.setText(listaPosicaoLetrasEncontradasPalavra1[2]);
@@ -712,77 +700,72 @@ public class TelaJogadores extends javax.swing.JFrame {
                     p1l13.setText(listaPosicaoLetrasEncontradasPalavra1[12]);
                     p1l14.setText(listaPosicaoLetrasEncontradasPalavra1[13]);
                     p1l15.setText(listaPosicaoLetrasEncontradasPalavra1[14]);
+                } catch (Exception ex) {
+
                 }
-                catch(Exception ex){
-      
-                }
-                
-            break;
-            
+
+                break;
+
             case 2:
                 System.err.println(palavra1);
-                for(int i = 0; i < palavra1.length(); i ++){
+                for (int i = 0; i < palavra1.length(); i++) {
                     achouLetra = palavra1.substring(i, i + 1);
-                    
-                    if(achouLetra.equals(letraEscolhida)){
-                       listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
-                       if(valorReaisSorteado > 0){
+
+                    if (achouLetra.equals(letraEscolhida)) {
+                        listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
+                        if (valorReaisSorteado > 0) {
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
-                       }
-                       if(encontrouLetra == true){
+                        }
+                        if (encontrouLetra == true) {
                             metodos.audioLetraCorreta();
                             encontrouLetra = false;
-                       }
-                    }
-                    else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
+                        }
+                    } else if (listaPosicaoLetrasEncontradasPalavra1[i] == " ") {
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
-                    
-                    
+
                 }
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)) {//Se jogador errar pula para proximo jogador
 //                    jogadorErrou = true;
                     encontrouLetraPalavraAnterior1 = false;
                 }
-                
+
                 System.err.println(palavra2);
-                for(int i = 0; i < palavra2.length(); i ++){
+                for (int i = 0; i < palavra2.length(); i++) {
                     achouLetra = palavra2.substring(i, i + 1);
-                    
-                    if(achouLetra.equals(letraEscolhida)){
-                       listaPosicaoLetrasEncontradasPalavra2[i] = letraEscolhida;
-                       if(valorReaisSorteado > 0){
+
+                    if (achouLetra.equals(letraEscolhida)) {
+                        listaPosicaoLetrasEncontradasPalavra2[i] = letraEscolhida;
+                        if (valorReaisSorteado > 0) {
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
-                       }
-                       if(encontrouLetra == true){
-                         metodos.audioLetraCorreta();
-                         encontrouLetra = false;
-                       }
-                    }
-                    else if(listaPosicaoLetrasEncontradasPalavra2[i] == " "){
+                        }
+                        if (encontrouLetra == true) {
+                            metodos.audioLetraCorreta();
+                            encontrouLetra = false;
+                        }
+                    } else if (listaPosicaoLetrasEncontradasPalavra2[i] == " ") {
                         listaPosicaoLetrasEncontradasPalavra2[i] = " ";
                     }
-                    
+
                 }
-                
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida) && encontrouLetraPalavraAnterior1 == false){//Se jogador errar pula para proximo jogador
+
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida) && encontrouLetraPalavraAnterior1 == false) {//Se jogador errar pula para proximo jogador
                     jogadorErrou = true;
-                    qtdErrosJogador1 = qtdErrosJogador1 + 1;                 
+                    qtdErrosJogador1 = qtdErrosJogador1 + 1;
                     metodos.audioLetraErrada();
-                    
+
                 }
-                
-                if(respostaATiva == true){//Trata resposta do jogador
-                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida)){
-                        if(qtdJogadores == 1){
+
+                if (respostaATiva == true) {//Trata resposta do jogador
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida)) {
+                        if (qtdJogadores == 1) {
                             JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
                             saldoJogador1.setOpaque(true);
                             saldoJogador1.setBackground(Color.red);
                             saldoJogador1.repaint();
                             jogador1EliminadoRodada = true;
                             escondeTecladoLetras();
-                        }
-                        else{
+                        } else {
 //                        else if(jogadorCorrente == 2){
 //                            saldoJogador2.setOpaque(true);
 //                            saldoJogador2.setBackground(Color.red);
@@ -801,16 +784,15 @@ public class TelaJogadores extends javax.swing.JFrame {
                             respostaATiva = false;
                             btResponder.setEnabled(true);
                         }
-                    }
-                    else{
+                    } else {
                         btRodar.setEnabled(false);
                         mostraTecladoLetras();
                     }
-                    
+
                 }
-                
-                try{
-                    
+
+                try {
+
                     p1l1.setText(listaPosicaoLetrasEncontradasPalavra1[0]);
                     p1l2.setText(listaPosicaoLetrasEncontradasPalavra1[1]);
                     p1l3.setText(listaPosicaoLetrasEncontradasPalavra1[2]);
@@ -826,12 +808,10 @@ public class TelaJogadores extends javax.swing.JFrame {
                     p1l13.setText(listaPosicaoLetrasEncontradasPalavra1[12]);
                     p1l14.setText(listaPosicaoLetrasEncontradasPalavra1[13]);
                     p1l15.setText(listaPosicaoLetrasEncontradasPalavra1[14]);
+                } catch (Exception ex) {
                 }
-                catch(Exception ex){
-                }
-                
-                     
-                try{    
+
+                try {
                     p2l1.setText(listaPosicaoLetrasEncontradasPalavra2[0]);
                     p2l2.setText(listaPosicaoLetrasEncontradasPalavra2[1]);
                     p2l3.setText(listaPosicaoLetrasEncontradasPalavra2[2]);
@@ -847,103 +827,97 @@ public class TelaJogadores extends javax.swing.JFrame {
                     p2l13.setText(listaPosicaoLetrasEncontradasPalavra2[12]);
                     p2l14.setText(listaPosicaoLetrasEncontradasPalavra2[13]);
                     p2l15.setText(listaPosicaoLetrasEncontradasPalavra2[14]);
+                } catch (Exception ex) {
                 }
-                catch(Exception ex){
-                }
-                
-            break;
-                
+
+                break;
+
             case 3:
                 boolean validaSeEncontrou1 = false;
                 boolean validaSeEncontrou2 = false;
                 boolean validaSeErrou1 = false;
                 boolean validaSeErrou2 = false;
                 System.err.println(palavra1);
-                for(int i = 0; i < palavra1.length(); i ++){
+                for (int i = 0; i < palavra1.length(); i++) {
                     achouLetra = palavra1.substring(i, i + 1);
-                    
-                    if(achouLetra.equals(letraEscolhida)){
-                       listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
-                       if(valorReaisSorteado > 0){
+
+                    if (achouLetra.equals(letraEscolhida)) {
+                        listaPosicaoLetrasEncontradasPalavra1[i] = letraEscolhida;
+                        if (valorReaisSorteado > 0) {
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
-                       }
-                       if(encontrouLetra == true){
+                        }
+                        if (encontrouLetra == true) {
                             metodos.audioLetraCorreta();
                             encontrouLetra = false;
-                       }
-                    }
-                    else if(listaPosicaoLetrasEncontradasPalavra1[i] == " "){
+                        }
+                    } else if (listaPosicaoLetrasEncontradasPalavra1[i] == " ") {
                         listaPosicaoLetrasEncontradasPalavra1[i] = " ";
                     }
-                    
+
                 }
-                
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida)) {//Se jogador errar pula para proximo jogador
                     encontrouLetraPalavraAnterior1 = false;
                 }
-                
+
                 System.err.println(palavra2);
-                for(int i = 0; i < palavra2.length(); i ++){
+                for (int i = 0; i < palavra2.length(); i++) {
                     achouLetra = palavra2.substring(i, i + 1);
-                    
-                    if(achouLetra.equals(letraEscolhida)){
-                       listaPosicaoLetrasEncontradasPalavra2[i] = letraEscolhida;
-                       if(valorReaisSorteado > 0){
+
+                    if (achouLetra.equals(letraEscolhida)) {
+                        listaPosicaoLetrasEncontradasPalavra2[i] = letraEscolhida;
+                        if (valorReaisSorteado > 0) {
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
-                       }
-                       if(encontrouLetra == true){
+                        }
+                        if (encontrouLetra == true) {
                             metodos.audioLetraCorreta();
                             encontrouLetra = false;
-                       }
-                    }
-                    else if(listaPosicaoLetrasEncontradasPalavra2[i] == " "){
+                        }
+                    } else if (listaPosicaoLetrasEncontradasPalavra2[i] == " ") {
                         listaPosicaoLetrasEncontradasPalavra2[i] = " ";
                     }
-                    
+
                 }
-                
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida)){//Se jogador errar pula para proximo jogador
+
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida)) {//Se jogador errar pula para proximo jogador
                     encontrouLetraPalavraAnterior2 = false;
                 }
-                
+
                 System.err.println(palavra3);
-                for(int i = 0; i < palavra3.length(); i ++){
+                for (int i = 0; i < palavra3.length(); i++) {
                     achouLetra = palavra3.substring(i, i + 1);
-                    
-                    if(achouLetra.equals(letraEscolhida)){
-                       listaPosicaoLetrasEncontradasPalavra3[i] = letraEscolhida;
-                       if(valorReaisSorteado > 0){
+
+                    if (achouLetra.equals(letraEscolhida)) {
+                        listaPosicaoLetrasEncontradasPalavra3[i] = letraEscolhida;
+                        if (valorReaisSorteado > 0) {
                             valorReaisAcumuladoJogadorCorrente = valorReaisAcumuladoJogadorCorrente + valorReaisSorteado; //valor da roleta * quantidade de letras encontradas + valor já acumulado
-                       }
-                       if(encontrouLetra == true && encontrouLetra == true){
-                         metodos.audioLetraCorreta();
-                       }
-                    }
-                    else if(listaPosicaoLetrasEncontradasPalavra3[i] == " "){
+                        }
+                        if (encontrouLetra == true && encontrouLetra == true) {
+                            metodos.audioLetraCorreta();
+                        }
+                    } else if (listaPosicaoLetrasEncontradasPalavra3[i] == " ") {
                         listaPosicaoLetrasEncontradasPalavra3[i] = " ";
                     }
-                    
+
                 }
-                
-                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(letraEscolhida) && encontrouLetraPalavraAnterior1 == false && encontrouLetraPalavraAnterior2 == false){//Se jogador errar pula para proximo jogador
+
+                if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(letraEscolhida) && encontrouLetraPalavraAnterior1 == false && encontrouLetraPalavraAnterior2 == false) {//Se jogador errar pula para proximo jogador
                     jogadorErrou = true;
                     qtdErrosJogador1 = qtdErrosJogador1 + 1;
-                        metodos.audioLetraErrada();
-                      
+                    metodos.audioLetraErrada();
+
                 }
-                
-                
-                if(respostaATiva == true){//Trata resposta do jogador
-                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(letraEscolhida)){
-                        if(qtdJogadores == 1){
+
+                if (respostaATiva == true) {//Trata resposta do jogador
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(letraEscolhida) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(letraEscolhida)) {
+                        if (qtdJogadores == 1) {
                             JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
                             saldoJogador1.setOpaque(true);
                             saldoJogador1.setBackground(Color.red);
                             saldoJogador1.repaint();
                             jogador1EliminadoRodada = true;
                             escondeTecladoLetras();
-                        }
-                        else{
+                        } else {
 //                        else if(jogadorCorrente == 2){
 //                            saldoJogador2.setOpaque(true);
 //                            saldoJogador2.setBackground(Color.red);
@@ -962,15 +936,14 @@ public class TelaJogadores extends javax.swing.JFrame {
                             respostaATiva = false;
                             btResponder.setEnabled(true);
                         }
-                    }
-                    else{
+                    } else {
                         btRodar.setEnabled(false);
                         mostraTecladoLetras();
                     }
-                    
+
                 }
-                    
-                try{    
+
+                try {
                     p1l1.setText(listaPosicaoLetrasEncontradasPalavra1[0]);
                     p1l2.setText(listaPosicaoLetrasEncontradasPalavra1[1]);
                     p1l3.setText(listaPosicaoLetrasEncontradasPalavra1[2]);
@@ -986,11 +959,10 @@ public class TelaJogadores extends javax.swing.JFrame {
                     p1l13.setText(listaPosicaoLetrasEncontradasPalavra1[12]);
                     p1l14.setText(listaPosicaoLetrasEncontradasPalavra1[13]);
                     p1l15.setText(listaPosicaoLetrasEncontradasPalavra1[14]);
+                } catch (Exception ex) {
                 }
-                catch(Exception ex){
-                }
-                    
-                try{
+
+                try {
                     p2l1.setText(listaPosicaoLetrasEncontradasPalavra2[0]);
                     p2l2.setText(listaPosicaoLetrasEncontradasPalavra2[1]);
                     p2l3.setText(listaPosicaoLetrasEncontradasPalavra2[2]);
@@ -1006,11 +978,10 @@ public class TelaJogadores extends javax.swing.JFrame {
                     p2l13.setText(listaPosicaoLetrasEncontradasPalavra2[12]);
                     p2l14.setText(listaPosicaoLetrasEncontradasPalavra2[13]);
                     p2l15.setText(listaPosicaoLetrasEncontradasPalavra2[14]);
+                } catch (Exception ex) {
                 }
-                catch(Exception ex){
-                }
-                                
-                try{    
+
+                try {
                     p3l1.setText(listaPosicaoLetrasEncontradasPalavra3[0]);
                     p3l2.setText(listaPosicaoLetrasEncontradasPalavra3[1]);
                     p3l3.setText(listaPosicaoLetrasEncontradasPalavra3[2]);
@@ -1026,295 +997,280 @@ public class TelaJogadores extends javax.swing.JFrame {
                     p3l13.setText(listaPosicaoLetrasEncontradasPalavra3[12]);
                     p3l14.setText(listaPosicaoLetrasEncontradasPalavra3[13]);
                     p3l15.setText(listaPosicaoLetrasEncontradasPalavra3[14]);
+                } catch (Exception ex) {
+
                 }
-                catch(Exception ex){
-                    
-                }
-                    
-            break;   
+
+                break;
         }
-        if(respostaATiva == false){
-            switch(qtdPalavras){//Valida se jogador corrente canhou a partida acertando todas as letras
-                    case 1:
-                        if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null)){
-                            JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                            escondeTecladoLetras();
-                            btRodar.setVisible(false);
-                            btResponder.setVisible(false);
-                            btAvancar.setVisible(true);
-                            
-                            if(jogadorCorrente == 1){
-                                valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
-                            }
-                            else if(jogadorCorrente == 2){
-                                valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
-                            }
-                            else if(jogadorCorrente == 3){
-                                valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
-                            }
-
-                        
-                            if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
-                                btAvancar.setVisible(false);
-
-                                if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + (valorAcumuladoJogador1 ) + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Mister Bim ganhou!");
-                                }
-                                if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Dilma ganhou!");
-                                }
-                                if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Barack Obama ganhou!");
-                                }
-
-                            }
-                        }
-                            
-                    break;
-
-                    case 2:
-                        if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null)){
-                            JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                            escondeTecladoLetras();
-                            btRodar.setVisible(false);
-                            btResponder.setVisible(false);
-                            btAvancar.setVisible(true);
-                            
-                            if(jogadorCorrente == 1){
-                                valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
-                            }
-                            else if(jogadorCorrente == 2){
-                                valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
-                            }
-                            else if(jogadorCorrente == 3){
-                                valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
-                            }
-                        
-                            if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
-                                btAvancar.setVisible(false);
-
-                                if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Mister Bim ganhou!");
-                                }
-                                if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Dilma ganhou!");
-                                }
-                                if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Barack Obama ganhou!");
-                                }
-                            }
-                            
-                        }
-                    break;
-
-                    case 3:
-                        if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(null)){
-                            JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
-                            escondeTecladoLetras();
-                            btRodar.setVisible(false);
-                            btResponder.setVisible(false);
-                            btAvancar.setVisible(true);
-                            
-                            if(jogadorCorrente == 1){
-                                valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
-                            }
-                            else if(jogadorCorrente == 2){
-                                valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
-                            }
-                            else if(jogadorCorrente == 3){
-                                valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
-                            }
-      
-                            if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
-                                btAvancar.setVisible(false);
-
-                                if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Mister Bim ganhou!");
-                                }
-                                if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Dilma ganhou!");
-                                }
-                                if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Barack Obama ganhou!");
-                                }
-                            }
-                            
-                        }
-                    break;    
-                }
-        }
-        
-        if(respostaATiva == true){ //Valida se jogador corrente canhou a partida respondendo as palavras
-            switch(qtdPalavras){
+        if (respostaATiva == false) {
+            switch (qtdPalavras) {//Valida se jogador corrente canhou a partida acertando todas as letras
                 case 1:
-                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null)){
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null)) {
                         JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
                         escondeTecladoLetras();
                         btRodar.setVisible(false);
                         btResponder.setVisible(false);
                         btAvancar.setVisible(true);
-                        
-                            if(jogadorCorrente == 1){
-                                valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
-                            }
-                            else if(jogadorCorrente == 2){
-                                valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
-                            }
-                            else if(jogadorCorrente == 3){
-                                valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
-                            }
 
-                        if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
-                                btAvancar.setVisible(false);
-
-                                if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Mister Bim ganhou!");
-                                }
-                                if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Dilma ganhou!");
-                                }
-                                if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Barack Obama ganhou!");
-                                }
+                        if (jogadorCorrente == 1) {
+                            valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
+                        } else if (jogadorCorrente == 2) {
+                            valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
+                        } else if (jogadorCorrente == 3) {
+                            valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
                         }
-                            
+
+                        if (Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))) {
+                            btAvancar.setVisible(false);
+
+                            if (valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + (valorAcumuladoJogador1) + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if (valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if (valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+
+                        }
                     }
-                break;
-                
+
+                    break;
+
                 case 2:
-                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null)){
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null)) {
                         JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
                         escondeTecladoLetras();
                         btRodar.setVisible(false);
                         btResponder.setVisible(false);
                         btAvancar.setVisible(true);
-                        
-                            if(jogadorCorrente == 1){
-                                valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
-                            }
-                            else if(jogadorCorrente == 2){
-                                valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
-                            }
-                            else if(jogadorCorrente == 3){
-                                valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
-                            }
 
-                        if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
-                                btAvancar.setVisible(false);
-
-                                if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Mister Bim ganhou!");
-                                }
-                                if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Dilma ganhou!");
-                                }
-                                if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Barack Obama ganhou!");
-                                }
-                            }
-                            
+                        if (jogadorCorrente == 1) {
+                            valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
+                        } else if (jogadorCorrente == 2) {
+                            valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
+                        } else if (jogadorCorrente == 3) {
+                            valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
                         }
-                break;
-                    
+
+                        if (Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))) {
+                            btAvancar.setVisible(false);
+
+                            if (valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if (valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if (valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                        }
+
+                    }
+                    break;
+
                 case 3:
-                    if(!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(null)){
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(null)) {
                         JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
                         escondeTecladoLetras();
                         btRodar.setVisible(false);
                         btResponder.setVisible(false);
                         btAvancar.setVisible(true);
-                        
-                            if(jogadorCorrente == 1){
-                                valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
-                            }
-                            else if(jogadorCorrente == 2){
-                                valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
-                            }
-                            else if(jogadorCorrente == 3){
-                                valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
-                            }
 
-                        if(Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))){
-                                btAvancar.setVisible(false);
-
-                                if(valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Mister Bim ganhou!");
-                                }
-                                if(valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Dilma ganhou!");
-                                }
-                                if(valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2){
-                                    JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n" +
-                                                                                    "Dilma: " + valorAcumuladoJogador2 + "\n" +
-                                                                                    "Barack Obama: " + valorAcumuladoJogador3 + "\n" +
-                                                                                    "Fim de jogo, jogador Barack Obama ganhou!");
-                                }
-                            }
-                            
+                        if (jogadorCorrente == 1) {
+                            valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
+                        } else if (jogadorCorrente == 2) {
+                            valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
+                        } else if (jogadorCorrente == 3) {
+                            valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
                         }
-                break;    
+
+                        if (Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))) {
+                            btAvancar.setVisible(false);
+
+                            if (valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if (valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if (valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                        }
+
+                    }
+                    break;
             }
         }
-        
-        
-        if(respostaATiva == false){
+
+        if (respostaATiva == true) { //Valida se jogador corrente canhou a partida respondendo as palavras
+            switch (qtdPalavras) {
+                case 1:
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null)) {
+                        JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                        escondeTecladoLetras();
+                        btRodar.setVisible(false);
+                        btResponder.setVisible(false);
+                        btAvancar.setVisible(true);
+
+                        if (jogadorCorrente == 1) {
+                            valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
+                        } else if (jogadorCorrente == 2) {
+                            valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
+                        } else if (jogadorCorrente == 3) {
+                            valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
+                        }
+
+                        if (Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))) {
+                            btAvancar.setVisible(false);
+
+                            if (valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if (valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if (valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                        }
+
+                    }
+                    break;
+
+                case 2:
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null)) {
+                        JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                        escondeTecladoLetras();
+                        btRodar.setVisible(false);
+                        btResponder.setVisible(false);
+                        btAvancar.setVisible(true);
+
+                        if (jogadorCorrente == 1) {
+                            valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
+                        } else if (jogadorCorrente == 2) {
+                            valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
+                        } else if (jogadorCorrente == 3) {
+                            valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
+                        }
+
+                        if (Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))) {
+                            btAvancar.setVisible(false);
+
+                            if (valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if (valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if (valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                        }
+
+                    }
+                    break;
+
+                case 3:
+                    if (!Arrays.asList(listaPosicaoLetrasEncontradasPalavra1).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra2).contains(null) && !Arrays.asList(listaPosicaoLetrasEncontradasPalavra3).contains(null)) {
+                        JOptionPane.showMessageDialog(null, "Jogador " + jogadorCorrente + " ganhou a rodada!");
+                        escondeTecladoLetras();
+                        btRodar.setVisible(false);
+                        btResponder.setVisible(false);
+                        btAvancar.setVisible(true);
+
+                        if (jogadorCorrente == 1) {
+                            valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
+                        } else if (jogadorCorrente == 2) {
+                            valorAcumuladoJogador2 = valorAcumuladoJogador2 + Integer.parseInt(saldoJogador2.getText());
+                        } else if (jogadorCorrente == 3) {
+                            valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
+                        }
+
+                        if (Integer.parseInt(etapa.getText().substring(0, 1)) == Integer.parseInt(etapa.getText().substring(4, 5))) {
+                            btAvancar.setVisible(false);
+
+                            if (valorAcumuladoJogador1 > valorAcumuladoJogador2 && valorAcumuladoJogador1 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Mister Bim ganhou!");
+                            }
+                            if (valorAcumuladoJogador2 > valorAcumuladoJogador1 && valorAcumuladoJogador2 > valorAcumuladoJogador3) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Dilma ganhou!");
+                            }
+                            if (valorAcumuladoJogador3 > valorAcumuladoJogador1 && valorAcumuladoJogador3 > valorAcumuladoJogador2) {
+                                JOptionPane.showMessageDialog(null, "Resultado: Mister Bim: " + valorAcumuladoJogador1 + "\n"
+                                        + "Dilma: " + valorAcumuladoJogador2 + "\n"
+                                        + "Barack Obama: " + valorAcumuladoJogador3 + "\n"
+                                        + "Fim de jogo, jogador Barack Obama ganhou!");
+                            }
+                        }
+
+                    }
+                    break;
+            }
+        }
+
+        if (respostaATiva == false) {
             trataPontuacaoJogadores();
         }
 
     }
-    
-    public void escondeTecladoLetras(){
+
+    public void escondeTecladoLetras() {
         btA.setVisible(false);
         btB.setVisible(false);
         btC.setVisible(false);
@@ -1341,12 +1297,12 @@ public class TelaJogadores extends javax.swing.JFrame {
         btW.setVisible(false);
         btY.setVisible(false);
         btZ.setVisible(false);
-        
+
         btRodar.setEnabled(true);
         btResponder.setEnabled(true);
     }
-    
-    public void mostraTecladoLetras(){
+
+    public void mostraTecladoLetras() {
         btA.setVisible(true);
         btB.setVisible(true);
         btC.setVisible(true);
@@ -1373,286 +1329,276 @@ public class TelaJogadores extends javax.swing.JFrame {
         btW.setVisible(true);
         btY.setVisible(true);
         btZ.setVisible(true);
-        
+
         btResponder.setEnabled(false);
     }
-    
-    public void trataPontuacaoJogadores(){
+
+    public void trataPontuacaoJogadores() {
         saldoJogador1.setBackground(Color.WHITE);
         saldoJogador2.setBackground(Color.WHITE);
         saldoJogador3.setBackground(Color.WHITE);
-        
-        switch(qtdJogadores){
-            
+
+        switch (qtdJogadores) {
+
             case 1:
-                saldoJogador1.setOpaque(true);              
-                if(qtdErrosJogador1 > 3){
+                saldoJogador1.setOpaque(true);
+                if (qtdErrosJogador1 > 3) {
                     JOptionPane.showMessageDialog(null, "Você perdeu, pratique mais!");
                     btRodar.setEnabled(false);
                     btResponder.setEnabled(false);
+                } else {
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText())));
                 }
-                else{                
-                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText()) ));
-                }
-            break;
-                
-            case 2:    
+                break;
+
+            case 2:
                 boolean validador = false;//Usado para não deixar entrar 2 vezes na logica do jogador 1
-                if(jogadorErrou == true && jogadorCorrente == 1){ //caso jogador corrente erre a letra passa a vez para o proximo
+                if (jogadorErrou == true && jogadorCorrente == 1) { //caso jogador corrente erre a letra passa a vez para o proximo
                     jogadorCorrente = 2;
                     jogadorErrou = false;
-                    saldoJogador1.setOpaque(false);  
+                    saldoJogador1.setOpaque(false);
                     saldoJogador2.setOpaque(true);
-                    saldoJogador1.repaint(); 
-                    saldoJogador2.repaint(); 
-                    
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+
                 }
-                
-                if(jogadorCorrente == 1){
-                    saldoJogador1.setOpaque(true);  
+
+                if (jogadorCorrente == 1) {
+                    saldoJogador1.setOpaque(true);
                     saldoJogador2.setOpaque(false);
-                    saldoJogador1.repaint(); 
-                    saldoJogador2.repaint(); 
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
                     validador = true;
-                
-                    if(valorReaisSorteado < 0){
+
+                    if (valorReaisSorteado < 0) {
                         saldoJogador1.setText("0");
                     }
-                    if(valorReaisSorteado == 0){
+                    if (valorReaisSorteado == 0) {
                         jogadorCorrente = 2;
                         jogadorErrou = true;
-                        saldoJogador1.setOpaque(false);  
+                        saldoJogador1.setOpaque(false);
                         saldoJogador2.setOpaque(true);
-                        saldoJogador1.repaint(); 
+                        saldoJogador1.repaint();
                         saldoJogador2.repaint();
                     }
 
-                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText()) ));
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText())));
                 }
-                
-                
-                
-                if(jogadorErrou == true && jogadorCorrente == 2){//caso jogador corrente erre a letra passa a vez para o proximo
+
+                if (jogadorErrou == true && jogadorCorrente == 2) {//caso jogador corrente erre a letra passa a vez para o proximo
                     jogadorCorrente = 1;
                     jogadorErrou = false;
-                    saldoJogador1.setOpaque(true);  
-                    saldoJogador2.setOpaque(false); 
-                    saldoJogador1.repaint(); 
-                    saldoJogador2.repaint(); 
-                    
+                    saldoJogador1.setOpaque(true);
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+
                 }
-                
-                if(jogadorCorrente == 2){
-                    saldoJogador1.setOpaque(false);  
+
+                if (jogadorCorrente == 2) {
+                    saldoJogador1.setOpaque(false);
                     saldoJogador2.setOpaque(true);
-                    saldoJogador1.repaint(); 
-                    saldoJogador2.repaint(); 
-                
-                    if(valorReaisSorteado < 0){
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+
+                    if (valorReaisSorteado < 0) {
                         saldoJogador2.setText("0");
                     }
-                    if(valorReaisSorteado == 0){
+                    if (valorReaisSorteado == 0) {
                         jogadorCorrente = 1;
                         jogadorErrou = true;
-                        saldoJogador1.setOpaque(true);  
+                        saldoJogador1.setOpaque(true);
                         saldoJogador2.setOpaque(false);
-                        saldoJogador1.repaint(); 
+                        saldoJogador1.repaint();
                         saldoJogador2.repaint();
                     }
                     saldoJogador2.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador2.getText())));
                 }
-                
-                
-                
-                if(jogadorErrou == true && jogadorCorrente == 1){ //caso jogador corrente erre a letra passa a vez para o proximo
+
+                if (jogadorErrou == true && jogadorCorrente == 1) { //caso jogador corrente erre a letra passa a vez para o proximo
                     jogadorCorrente = 2;
                     jogadorErrou = false;
-                    saldoJogador1.setOpaque(false);  
-                    saldoJogador2.setOpaque(true); 
-                    saldoJogador1.repaint(); 
-                    saldoJogador2.repaint(); 
-                    
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(true);
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+
                 }
-   
-                if(jogadorCorrente == 1 && validador == false){
-                    saldoJogador1.setOpaque(true);  
+
+                if (jogadorCorrente == 1 && validador == false) {
+                    saldoJogador1.setOpaque(true);
                     saldoJogador2.setOpaque(false);
-                    saldoJogador1.repaint(); 
-                    saldoJogador2.repaint(); 
-                
-                    if(valorReaisSorteado < 0){
+                    saldoJogador1.repaint();
+                    saldoJogador2.repaint();
+
+                    if (valorReaisSorteado < 0) {
                         saldoJogador1.setText("0");
                     }
-                    if(valorReaisSorteado == 0){
+                    if (valorReaisSorteado == 0) {
                         jogadorCorrente = 2;
                         jogadorErrou = true;
-                        saldoJogador1.setOpaque(false);  
+                        saldoJogador1.setOpaque(false);
                         saldoJogador2.setOpaque(true);
-                        saldoJogador1.repaint(); 
+                        saldoJogador1.repaint();
                         saldoJogador2.repaint();
                     }
 
-                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText()) ));
+                    saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText())));
                 }
-                
-            break;
-                
+
+                break;
+
             case 3:
                 boolean validador2 = false;//Usado para não deixar entrar 2 vezes na logica do jogador 1
-                if(jogadorErrou == true && jogadorCorrente == 1){//caso jogador corrente erre a letra passa a vez para o proximo
+                if (jogadorErrou == true && jogadorCorrente == 1) {//caso jogador corrente erre a letra passa a vez para o proximo
                     jogadorCorrente = 2;
                     jogadorErrou = false;
-                    saldoJogador1.setOpaque(false);  
-                    saldoJogador2.setOpaque(true); 
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(true);
                     saldoJogador3.setOpaque(false);
-                    saldoJogador1.repaint(); 
+                    saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
                 }
-                
-                if(jogadorCorrente == 1){
-                    saldoJogador1.setOpaque(true);  
-                    saldoJogador2.setOpaque(false);    
+
+                if (jogadorCorrente == 1) {
+                    saldoJogador1.setOpaque(true);
+                    saldoJogador2.setOpaque(false);
                     saldoJogador3.setOpaque(false);
-                    saldoJogador1.repaint(); 
+                    saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
                     validador2 = true;
-                    
-                
-                    if(valorReaisSorteado < 0){
+
+                    if (valorReaisSorteado < 0) {
                         saldoJogador1.setText("0");
-                        
+
                     }
-                    if(valorReaisSorteado == 0){
+                    if (valorReaisSorteado == 0) {
                         jogadorCorrente = 2;
                         jogadorErrou = true;
-                        saldoJogador1.setOpaque(false);  
-                        saldoJogador2.setOpaque(true); 
+                        saldoJogador1.setOpaque(false);
+                        saldoJogador2.setOpaque(true);
                         saldoJogador3.setOpaque(false);
-                        saldoJogador1.repaint(); 
+                        saldoJogador1.repaint();
                         saldoJogador2.repaint();
                         saldoJogador3.repaint();
                     }
                     saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText())));
                 }
-                
-                
-                
-                if(jogadorErrou == true && jogadorCorrente == 2){//caso jogador corrente erre a letra passa a vez para o proximo
+
+                if (jogadorErrou == true && jogadorCorrente == 2) {//caso jogador corrente erre a letra passa a vez para o proximo
                     jogadorCorrente = 3;
                     jogadorErrou = false;
-                    saldoJogador1.setOpaque(false);  
-                    saldoJogador2.setOpaque(false); 
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(false);
                     saldoJogador3.setOpaque(true);
-                    saldoJogador1.repaint(); 
+                    saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
                 }
-                
-                if(jogadorCorrente == 2 && jogadorErrou == false){
-                    saldoJogador1.setOpaque(false);  
-                    saldoJogador2.setOpaque(true);                      
-                    saldoJogador3.setOpaque(false); 
-                    saldoJogador1.repaint(); 
+
+                if (jogadorCorrente == 2 && jogadorErrou == false) {
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(true);
+                    saldoJogador3.setOpaque(false);
+                    saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
-                
-                    if(valorReaisSorteado < 0){
+
+                    if (valorReaisSorteado < 0) {
                         saldoJogador2.setText("0");
                     }
-                    if(valorReaisSorteado == 0){//caso jogador corrente erre a letra passa a vez para o proximo
+                    if (valorReaisSorteado == 0) {//caso jogador corrente erre a letra passa a vez para o proximo
                         jogadorCorrente = 3;
                         jogadorErrou = true;
-                        saldoJogador1.setOpaque(false);  
-                        saldoJogador2.setOpaque(false); 
+                        saldoJogador1.setOpaque(false);
+                        saldoJogador2.setOpaque(false);
                         saldoJogador3.setOpaque(true);
-                        saldoJogador1.repaint(); 
+                        saldoJogador1.repaint();
                         saldoJogador2.repaint();
                         saldoJogador3.repaint();
                     }
                     saldoJogador2.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador2.getText())));
                 }
-                
-                if(jogadorErrou == true && jogadorCorrente == 3){
+
+                if (jogadorErrou == true && jogadorCorrente == 3) {
                     jogadorCorrente = 1;
                     jogadorErrou = false;
-                    saldoJogador1.setOpaque(true);  
-                    saldoJogador2.setOpaque(false); 
-                    saldoJogador3.setOpaque(false); 
-                    saldoJogador1.repaint(); 
+                    saldoJogador1.setOpaque(true);
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador3.setOpaque(false);
+                    saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
                 }
-                
-                if(jogadorCorrente == 3){
-                    saldoJogador1.setOpaque(false);  
-                    saldoJogador2.setOpaque(false);                      
-                    saldoJogador3.setOpaque(true); 
-                    saldoJogador1.repaint(); 
+
+                if (jogadorCorrente == 3) {
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador3.setOpaque(true);
+                    saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
-                
-                    if(valorReaisSorteado < 0){
+
+                    if (valorReaisSorteado < 0) {
                         saldoJogador3.setText("0");
                     }
-                    if(valorReaisSorteado == 0){
+                    if (valorReaisSorteado == 0) {
                         jogadorCorrente = 1;
                         jogadorErrou = true;
-                        saldoJogador1.setOpaque(true);  
-                        saldoJogador2.setOpaque(false);                      
-                        saldoJogador3.setOpaque(false); 
-                        saldoJogador1.repaint(); 
+                        saldoJogador1.setOpaque(true);
+                        saldoJogador2.setOpaque(false);
+                        saldoJogador3.setOpaque(false);
+                        saldoJogador1.repaint();
                         saldoJogador2.repaint();
                         saldoJogador3.repaint();
-                        
+
                     }
                     saldoJogador3.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador3.getText())));
                 }
-                
-                
-                if(jogadorErrou == true && jogadorCorrente == 1){//caso jogador corrente erre a letra passa a vez para o proximo
+
+                if (jogadorErrou == true && jogadorCorrente == 1) {//caso jogador corrente erre a letra passa a vez para o proximo
                     jogadorCorrente = 2;
                     jogadorErrou = false;
-                    saldoJogador1.setOpaque(false);  
-                    saldoJogador2.setOpaque(true); 
+                    saldoJogador1.setOpaque(false);
+                    saldoJogador2.setOpaque(true);
                     saldoJogador3.setOpaque(false);
-                    saldoJogador1.repaint(); 
+                    saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
                 }
-                
-                if(jogadorCorrente == 1 && validador2 == false){
-                    saldoJogador1.setOpaque(true);  
-                    saldoJogador2.setOpaque(false);    
-                    saldoJogador3.setOpaque(false); 
-                    saldoJogador1.repaint(); 
+
+                if (jogadorCorrente == 1 && validador2 == false) {
+                    saldoJogador1.setOpaque(true);
+                    saldoJogador2.setOpaque(false);
+                    saldoJogador3.setOpaque(false);
+                    saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
-                    
-                
-                    if(valorReaisSorteado < 0){
+
+                    if (valorReaisSorteado < 0) {
                         saldoJogador1.setText("0");
-                        
+
                     }
-                    if(valorReaisSorteado == 0){
+                    if (valorReaisSorteado == 0) {
                         jogadorCorrente = 2;
                         jogadorErrou = true;
-                        saldoJogador1.setOpaque(false);  
-                        saldoJogador2.setOpaque(true);                      
-                        saldoJogador3.setOpaque(false); 
-                        saldoJogador1.repaint(); 
+                        saldoJogador1.setOpaque(false);
+                        saldoJogador2.setOpaque(true);
+                        saldoJogador3.setOpaque(false);
+                        saldoJogador1.repaint();
                         saldoJogador2.repaint();
                         saldoJogador3.repaint();
                     }
                     saldoJogador1.setText(String.valueOf(valorReaisAcumuladoJogadorCorrente + Integer.parseInt(saldoJogador1.getText())));
                 }
-                
-            break;
+
+                break;
         }
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -2429,7 +2375,7 @@ public class TelaJogadores extends javax.swing.JFrame {
     private void btAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAActionPerformed
         btA.setEnabled(false);
         escondeTecladoLetras();
-        letraSelecionada("A", listaPalavrasUsadasNoMomento, qtdPalavras);       
+        letraSelecionada("A", listaPalavrasUsadasNoMomento, qtdPalavras);
 
     }//GEN-LAST:event_btAActionPerformed
 
@@ -2496,60 +2442,50 @@ public class TelaJogadores extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(TelaJogadores.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(valorSorteado == 2 || valorSorteado == 8 || valorSorteado == 12 || valorSorteado == 17){
+
+        if (valorSorteado == 2 || valorSorteado == 8 || valorSorteado == 12 || valorSorteado == 17) {
             valorReaisSorteado = 100;
-        }
-        else if(valorSorteado == 4 || valorSorteado == 10 || valorSorteado == 14 || valorSorteado == 18){
+        } else if (valorSorteado == 4 || valorSorteado == 10 || valorSorteado == 14 || valorSorteado == 18) {
             valorReaisSorteado = 200;
-        }
-        else if(valorSorteado == 3 || valorSorteado == 6 || valorSorteado == 9 || valorSorteado == 13){
+        } else if (valorSorteado == 3 || valorSorteado == 6 || valorSorteado == 9 || valorSorteado == 13) {
             valorReaisSorteado = 400;
-        } 
-        else if(valorSorteado == 16 || valorSorteado == 19){
+        } else if (valorSorteado == 16 || valorSorteado == 19) {
             valorReaisSorteado = 500;
-        }
-        else if(valorSorteado == 1 || valorSorteado == 7){
+        } else if (valorSorteado == 1 || valorSorteado == 7) {
             valorReaisSorteado = 1000;
-        }
-        else if(valorSorteado == 5 || valorSorteado == 15){
+        } else if (valorSorteado == 5 || valorSorteado == 15) {
             valorReaisSorteado = 0; //passa
-        }
-        else if(valorSorteado == 11 || valorSorteado == 20){
+        } else if (valorSorteado == 11 || valorSorteado == 20) {
             valorReaisSorteado = -1; //perde
         }
-        
-        if(valorReaisSorteado > 0){
+
+        if (valorReaisSorteado > 0) {
             mostraTecladoLetras();
             btRodar.setEnabled(false);
-        }
-        else{
-            if(qtdJogadores == 1){
-                if(valorReaisSorteado == -1 && jogadorCorrente == 1){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+        } else {
+            if (qtdJogadores == 1) {
+                if (valorReaisSorteado == -1 && jogadorCorrente == 1) {//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
                     saldoJogador1.setText("0");
                 }
             }
-            
-            if(qtdJogadores == 2){//caso a sorte seja passa a vez´ ou perde tudo passa para proximo jogador
-                
-                if(valorReaisSorteado == -1 && jogadorCorrente == 1){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+
+            if (qtdJogadores == 2) {//caso a sorte seja passa a vez´ ou perde tudo passa para proximo jogador
+
+                if (valorReaisSorteado == -1 && jogadorCorrente == 1) {//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
                     saldoJogador1.setText("0");
-                }
-                else if(valorReaisSorteado == -1 && jogadorCorrente == 2){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                } else if (valorReaisSorteado == -1 && jogadorCorrente == 2) {//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
                     saldoJogador2.setText("0");
-                }
-                else if(valorReaisSorteado == -1 && jogadorCorrente == 3){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                } else if (valorReaisSorteado == -1 && jogadorCorrente == 3) {//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
                     saldoJogador3.setText("0");
                 }
-                
-                if(jogadorCorrente == 1){
+
+                if (jogadorCorrente == 1) {
                     jogadorCorrente = 2;
                     saldoJogador1.setOpaque(false);
                     saldoJogador2.setOpaque(true);
                     saldoJogador1.repaint();
                     saldoJogador2.repaint();
-                }
-                else if(jogadorCorrente == 2){
+                } else if (jogadorCorrente == 2) {
                     jogadorCorrente = 1;
                     saldoJogador1.setOpaque(true);
                     saldoJogador2.setOpaque(false);
@@ -2557,20 +2493,18 @@ public class TelaJogadores extends javax.swing.JFrame {
                     saldoJogador2.repaint();
                 }
             }
-            
-            if(qtdJogadores == 3){//caso a sorte seja passa a vez´ ou perde tudo passa para proximo jogador
-                
-                if(valorReaisSorteado == -1 && jogadorCorrente == 1){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+
+            if (qtdJogadores == 3) {//caso a sorte seja passa a vez´ ou perde tudo passa para proximo jogador
+
+                if (valorReaisSorteado == -1 && jogadorCorrente == 1) {//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
                     saldoJogador1.setText("0");
-                }
-                else if(valorReaisSorteado == -1 && jogadorCorrente == 2){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                } else if (valorReaisSorteado == -1 && jogadorCorrente == 2) {//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
                     saldoJogador2.setText("0");
-                }
-                else if(valorReaisSorteado == -1 && jogadorCorrente == 3){//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
+                } else if (valorReaisSorteado == -1 && jogadorCorrente == 3) {//Caso a sorte seja perde tudo zera o saldo do jogador e habilita para rodar novamente
                     saldoJogador3.setText("0");
                 }
-                
-                if(jogadorCorrente == 1){
+
+                if (jogadorCorrente == 1) {
                     jogadorCorrente = 2;
                     saldoJogador1.setOpaque(false);
                     saldoJogador2.setOpaque(true);
@@ -2578,8 +2512,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                     saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
-                }
-                else if(jogadorCorrente == 2){
+                } else if (jogadorCorrente == 2) {
                     jogadorCorrente = 3;
                     saldoJogador1.setOpaque(false);
                     saldoJogador2.setOpaque(false);
@@ -2587,8 +2520,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                     saldoJogador1.repaint();
                     saldoJogador2.repaint();
                     saldoJogador3.repaint();
-                }
-                else if(jogadorCorrente == 3){
+                } else if (jogadorCorrente == 3) {
                     jogadorCorrente = 1;
                     saldoJogador1.setOpaque(true);
                     saldoJogador2.setOpaque(false);
@@ -2599,7 +2531,7 @@ public class TelaJogadores extends javax.swing.JFrame {
                 }
             }
         }
- 
+
     }//GEN-LAST:event_btRodarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
@@ -2715,15 +2647,15 @@ public class TelaJogadores extends javax.swing.JFrame {
     }//GEN-LAST:event_btZActionPerformed
 
     private void btResponderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResponderActionPerformed
-           respostaATiva = true;
-           roleta.setEnabled(false);
-           btRodar.setEnabled(false);
-           btResponder.setEnabled(false);
-           mostraTecladoLetras();
+        respostaATiva = true;
+        roleta.setEnabled(false);
+        btRodar.setEnabled(false);
+        btResponder.setEnabled(false);
+        mostraTecladoLetras();
     }//GEN-LAST:event_btResponderActionPerformed
 
     private void btAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAvancarActionPerformed
-    
+
         p1l1.setText("");
         p1l2.setText("");
         p1l3.setText("");
@@ -2769,7 +2701,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         p3l13.setText("");
         p3l14.setText("");
         p3l15.setText("");
-        
+
         p1l1.setOpaque(false);
         p1l2.setOpaque(false);
         p1l3.setOpaque(false);
@@ -2785,7 +2717,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         p1l13.setOpaque(false);
         p1l14.setOpaque(false);
         p1l15.setOpaque(false);
-        
+
         p2l1.setOpaque(false);
         p2l2.setOpaque(false);
         p2l3.setOpaque(false);
@@ -2817,7 +2749,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         p3l13.setOpaque(false);
         p3l14.setOpaque(false);
         p3l15.setOpaque(false);
-        
+
         btA.setEnabled(true);
         btB.setEnabled(true);
         btC.setEnabled(true);
@@ -2844,7 +2776,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         btW.setEnabled(true);
         btY.setEnabled(true);
         btZ.setEnabled(true);
-        
+
         btA.setSelected(false);
         btB.setSelected(false);
         btC.setSelected(false);
@@ -2871,9 +2803,9 @@ public class TelaJogadores extends javax.swing.JFrame {
         btW.setSelected(false);
         btY.setSelected(false);
         btZ.setSelected(false);
-     
+
         etapaAtual = 1 + Integer.parseInt(etapa.getText().substring(0, 1));  //Atualiza label da etapa  
-        etapa.setText( etapaAtual +" "+ etapa.getText().substring(2, 5)); //Atualiza label da etapa 
+        etapa.setText(etapaAtual + " " + etapa.getText().substring(2, 5)); //Atualiza label da etapa 
 
 //        if(jogadorCorrente == 1){
 //            valorAcumuladoJogador1 = valorAcumuladoJogador1 + Integer.parseInt(saldoJogador1.getText());
@@ -2884,22 +2816,21 @@ public class TelaJogadores extends javax.swing.JFrame {
 //        else if(jogadorCorrente == 3){
 //            valorAcumuladoJogador3 = valorAcumuladoJogador3 + Integer.parseInt(saldoJogador3.getText());
 //        }
-
         saldoJogador1.setText("");
         saldoJogador2.setText("");
         saldoJogador3.setText("");
-        
+
         listaPalavras.clear();
         listapalavrasSorteadas.clear();
         listaPalavrasUsadasNoMomento.clear();
 
-        for(int x = 0; x < listaPosicaoLetrasEncontradasPalavra1.length; x++){
+        for (int x = 0; x < listaPosicaoLetrasEncontradasPalavra1.length; x++) {
             listaPosicaoLetrasEncontradasPalavra1[x] = "";
         }
-        for(int y = 0; y < listaPosicaoLetrasEncontradasPalavra2.length; y++){
+        for (int y = 0; y < listaPosicaoLetrasEncontradasPalavra2.length; y++) {
             listaPosicaoLetrasEncontradasPalavra2[y] = "";
         }
-        for(int z = 0; z < listaPosicaoLetrasEncontradasPalavra3.length; z++){
+        for (int z = 0; z < listaPosicaoLetrasEncontradasPalavra3.length; z++) {
             listaPosicaoLetrasEncontradasPalavra3[z] = "";
         }
 
@@ -2911,7 +2842,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         jogador1EliminadoRodada = false;
         jogador2EliminadoRodada = false;
         jogador3EliminadoRodada = false;
-        
+
         try {
             listaPalavrasUsadasNoMomento = guardaPalavrasSorteadas();
         } catch (IOException ex) {
@@ -2925,7 +2856,7 @@ public class TelaJogadores extends javax.swing.JFrame {
         roleta.setEnabled(true);
         btRodar.setVisible(true);
         btResponder.setVisible(true);
-        
+
 //         if(qtdJogadores == 1){
 //            saldoJogador1.setText(String.valueOf(valorAcumuladoJogador1));
 //        }
@@ -2942,46 +2873,9 @@ public class TelaJogadores extends javax.swing.JFrame {
         saldoJogador2.setText("0");
         saldoJogador3.setText("0");
 
-
-        
         btAvancar.setVisible(false);
-        
-    }//GEN-LAST:event_btAvancarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaJogadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaJogadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaJogadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaJogadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaJogadores().setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_btAvancarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btA;

@@ -1,30 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogorodaroda.Interface;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jogorodaroda.Classe.Metodos;
 import jogorodaroda.Classe.Parametros;
 
 /**
- *
- * @author GAOliveira
- */
-public class TelaInicial extends javax.swing.JFrame{
+     * Classe responsável por iniciar a "TelaInicial"
+     *
+     * @author Geovane
+     * @author José Sérgio
+     * @version 1.0
+     *
+     */
+public class TelaInicial extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaInicial
      */
     public TelaInicial() {
         initComponents();
-        
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,23 +97,22 @@ public class TelaInicial extends javax.swing.JFrame{
     private void btIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIniciarActionPerformed
         //Armazena parametros
         Parametros parametros = new Parametros();
-        parametros.setQtdJogadores(comboJogador.getSelectedIndex()); 
+        parametros.setQtdJogadores(comboJogador.getSelectedIndex());
         parametros.setQtdPalavras(comboPalavras.getSelectedIndex());
         parametros.setQtdEtapas(comboEtapas.getSelectedIndex());
-        
-        
+
         TelaJogadores jogadores = null;
         try {
             jogadores = new TelaJogadores(parametros.getQtdJogadores(), parametros.getQtdPalavras(), parametros.getQtdEtapas());
         } catch (IOException ex) {
             Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-            jogadores.dispose();
-            jogadores.setVisible(true);
-            jogadores.setLocationRelativeTo(null);
+        jogadores.dispose();
+        jogadores.setVisible(true);
+        jogadores.setLocationRelativeTo(null);
 //                tresJogador.setExtendedState(MAXIMIZED_BOTH);
-            dispose();     
-        
+        dispose();
+
     }//GEN-LAST:event_btIniciarActionPerformed
 
     /**
@@ -151,10 +146,10 @@ public class TelaInicial extends javax.swing.JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaInicial().setVisible(true);
-                
+
             }
         });
-               
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

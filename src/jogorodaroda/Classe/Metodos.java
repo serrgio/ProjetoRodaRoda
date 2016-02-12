@@ -8,11 +8,23 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
 /**
+ * Classe com os métodos utilizado no jogo "Roda roda"
  *
- * @author GAOliveira
+ * @author Geovane
+ * @author José Sérgio
+ * @version 1.0
+ *
  */
 public class Metodos {
     
+     /**
+     * Método responsável executar o audio inicial do jogo
+     *
+     * @author Geovane
+     * @author José Sérgio
+     * @version 1.0
+     *
+     */
      public void audioInicial() { 
         
 //        for(int i = 0; i < 1; i ++){
@@ -22,21 +34,19 @@ public class Metodos {
                 try {  
                     BGM = new AudioStream(new FileInputStream("AberturaJogo.wav"));  
                 } catch(IOException error) {
-                    error.printStackTrace();
-                    System.out.println("Error!!!");  
+                    System.out.println("Error: "+error);  
                 }  
-
-                MGP.start(BGM);
-                
-//                try {
-//                    Thread.sleep( 10000 ); // coloca a "thread" para "dormir"
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace( System.err );
-//                }
-//        }
-        
+                MGP.start(BGM);        
     }
      
+     /**
+     * Método responsável executar o audio quando é selecionado uma letra errada
+     *
+     * @author Geovane
+     * @author José Sérgio
+     * @version 1.0
+     *
+     */
     public void audioLetraErrada() { 
         
 //        for(int i = 0; i < 2; i ++){
@@ -46,8 +56,7 @@ public class Metodos {
                 try {  
                     BGM = new AudioStream(new FileInputStream("LetraErrada.wav"));  
                 } catch(IOException error) {
-                    error.printStackTrace();
-                    System.out.println("Error!!!");  
+                    System.out.println("Error: "+error);  
                 }  
 
                 MGP.start(BGM);
@@ -61,7 +70,15 @@ public class Metodos {
         
     }
     
-    public void audioRoleta() { 
+    /**
+     * Método responsável executar o audio da animação da roleta
+     *
+     * @author Geovane
+     * @author José Sérgio
+     * @version 1.0
+     *
+     */
+    public void audioRoleta() {
         
 //        for(int i = 0; i < 2; i ++){
                        
@@ -70,8 +87,7 @@ public class Metodos {
                 try {  
                     BGM = new AudioStream(new FileInputStream("Roleta.wav"));  
                 } catch(IOException error) {
-                    error.printStackTrace();
-                    System.out.println("Error!!!");  
+                    System.out.println("Error: "+error);  
                 }  
 
                 MGP.start(BGM);
@@ -85,6 +101,13 @@ public class Metodos {
         
     }
     
+    /**
+     * Método responsável executar o audio quando selecionaddo a letra correta
+     * @author Geovane
+     * @author José Sérgio
+     * @version 1.0
+     *
+     */
     public void audioLetraCorreta() { 
         
 //        for(int i = 0; i < 2; i ++){
@@ -94,8 +117,7 @@ public class Metodos {
                 try {  
                     BGM = new AudioStream(new FileInputStream("LetraCorreta.wav"));  
                 } catch(IOException error) {
-                    error.printStackTrace();
-                    System.out.println("Error!!!");  
+                    System.out.println("Error: "+error);  
                 }  
 
                 MGP.start(BGM);
@@ -109,6 +131,17 @@ public class Metodos {
         
     }
      
+    /**
+     * Método responsável por buscar a plavra sorteada
+     *
+     * @author Geovane
+     * @author José Sérgio
+     * @version 1.0
+     * @param palavrasJaSorteadas
+     * @return ArrayList
+     * @throws java.io.IOException
+     *
+     */
      public ArrayList palavrasSorteadas(ArrayList palavrasJaSorteadas) throws IOException{
          ArrayList<String> listaPalavras = new ArrayList();
          ArrayList<String> p = new ArrayList();
@@ -118,8 +151,9 @@ public class Metodos {
          
          for(int i = 1; i <= 300; i ++){
             Random r = new Random();
-            int aleatorio = r.nextInt(21) + 1;
- 
+            int aleatorio = r.nextInt(21) + 1; 
+            
+                //Rever esse trecho de código
                 if(palavrasJaSorteadas.contains(listaPalavras.get(aleatorio)) || p.contains(listaPalavras.get(aleatorio))){
                     
                 } 
