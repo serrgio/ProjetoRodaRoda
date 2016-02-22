@@ -743,6 +743,7 @@ public final class TelaJogadores extends javax.swing.JFrame {
                             metodos.audioLetraCorreta();
                             encontrouLetra = false;
                         }
+                        //Alterar esse trecho de código.
                     } else if (listaPosicaoLetrasEncontradasPalavra2[i] == " ") {
                         listaPosicaoLetrasEncontradasPalavra2[i] = " ";
                     }
@@ -753,7 +754,6 @@ public final class TelaJogadores extends javax.swing.JFrame {
                     jogadorErrou = true;
                     qtdErrosJogador1 = qtdErrosJogador1 + 1;
                     metodos.audioLetraErrada();
-
                 }
 
                 if (respostaATiva == true) {//Trata resposta do jogador
